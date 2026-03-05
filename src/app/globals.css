@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --primary: #0F172A;
+  --secondary: #117A8B;
+  --accent: #2E8B57;
+  --background: #F4F6F8;
+  --text: #333333;
+  --background-dark: #061a2a;
+  --foreground: #333333;
+}
+
+@theme inline {
+  --color-primary: #0A2E4F;
+  --color-secondary: #117A8B;
+  --color-accent: #2E8B57;
+  --color-background: #F4F6F8;
+  --color-text: #333333;
+  --font-heading: var(--font-poppins);
+  --font-body: var(--font-inter);
+  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+}
+
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
