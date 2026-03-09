@@ -1,19 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { NewsroomItem } from "@/types/newsroom";
 
 /** Fallback when Firestore is empty or fails. Do not remove. */
 const DEFAULT_NEWS: NewsroomItem[] = [
-  {
-    title: "",
-    date: "21st December 2021",
-    description:
-      "A Cooperation Agreement has been signed in Abuja, Federal Capital Territory, between Maverick Energy Partners and PowerChina International for the development of the 460MW Grand Katsina-Ala hydropower project located in Benue State, Federal Republic of Nigeria.",
-    image: "/mep-media/image14.png",
-  },
   {
     title: "",
     date: "22nd August 2025",
@@ -36,12 +30,40 @@ const DEFAULT_NEWS: NewsroomItem[] = [
     image: "/mep-media/image17.png",
     fitImageFull: true,
   },
+  {
+    title: "",
+    date: "",
+    description:
+      "Engagements were held with the Federal Ministry of Water Resources and Sanitation (FMWR&S) on the proposed concession of the Grand Katsina-Ala Hydroelectric Power Project (GKHPP). The discussions focused on exploring a Public-Private Partnership (PPP) framework to support the development, operation, and long-term sustainability of the hydropower project",
+    image: "/mep-media/image18.png",
+  },
+  {
+    title: "",
+    date: "",
+    description:
+      "A delegation paid a courtesy visit to the Governor of Benue State to brief the state government on the proposed concession of the Grand Katsina-Ala Hydroelectric Power Project (GKHPP) and seek the state's support for the initiative. The meeting provided an opportunity to outline the objectives of the concession, underscore the project's strategic importance, and highlight its potential benefits for Benue State and its surrounding communities.",
+    image: "/mep-media/image19.png",
+  },
 ];
 
 type NewsroomProps = {
-  /** From Firestore; when provided and non-empty, overrides default news. */
+  /** From Firestore; when provided, merged with default news and sorted by date. */
   news?: NewsroomItem[] | null;
 };
+
+
+function parseDateForSort(dateStr: string): number {
+  if (!dateStr || !dateStr.trim()) return 0;
+  const normalized = dateStr.replace(/(\d+)(st|nd|rd|th)\s+/gi, "$1 ");
+  const d = new Date(normalized);
+  return isNaN(d.getTime()) ? 0 : d.getTime();
+}
+
+/** Merge Firestore news with default, sort newest first. */
+function mergeAndSortNews(firestoreNews: NewsroomItem[] | null | undefined): NewsroomItem[] {
+  const merged: NewsroomItem[] = [...(firestoreNews ?? []), ...DEFAULT_NEWS];
+  return merged.sort((a, b) => parseDateForSort(b.date) - parseDateForSort(a.date));
+}
 
 function NewsCard({ item }: { item: NewsroomItem }) {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -54,7 +76,7 @@ function NewsCard({ item }: { item: NewsroomItem }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4 }}
-      className="group overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-secondary/30 hover:shadow-md"
+      className="group overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-[#117A8B]/30 hover:shadow-md"
     >
       <div className="flex flex-col md:flex-row">
         <div
@@ -69,7 +91,7 @@ function NewsCard({ item }: { item: NewsroomItem }) {
               className="absolute inset-0 flex items-center justify-center bg-[#F4F6F8]"
               aria-hidden
             >
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#117A8B] border-t-transparent" />
             </div>
           )}
           <Image
@@ -85,17 +107,17 @@ function NewsCard({ item }: { item: NewsroomItem }) {
         </div>
         <div className="flex flex-1 flex-col justify-center p-6 md:p-8 min-w-0">
           {item.title ? (
-            <h3 className="font-(family-name:--font-poppins) text-lg font-bold text-primary">
+            <h3 className="font-[--font-poppins] text-lg font-bold text-[#0A2E4F]">
               {item.title}
             </h3>
           ) : null}
           <time
             dateTime={item.date.replace(/\s/g, "-")}
-            className="block text-sm font-semibold uppercase tracking-wider text-secondary mt-1"
+            className="block text-sm font-semibold uppercase tracking-wider text-[#117A8B] mt-1"
           >
-            Date: {item.date}
+            {item.date ? `Date: ${item.date}` : ""}
           </time>
-          <p className="mt-3 text-text leading-relaxed wrap-break-words">
+          <p className="mt-3 text-[#333333] leading-relaxed">
             {item.description}
           </p>
         </div>
@@ -104,36 +126,107 @@ function NewsCard({ item }: { item: NewsroomItem }) {
   );
 }
 
-export function Newsroom({ news }: NewsroomProps) {
-  const items = news && news.length > 0 ? news : DEFAULT_NEWS;
-
-  return (
-    <section
-      id="newsroom"
-      className="relative bg-background px-6 py-20 md:py-28"
-      aria-labelledby="newsroom-heading"
-    >
-      <div className="mx-auto max-w-6xl">
-        <motion.h2
-          id="newsroom-heading"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="font-(family-name:--font-poppins) text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl"
-        >
-          Newsroom
-        </motion.h2>
-        <div className="mt-14 space-y-6">
-          {items.map((item, i) => (
-            <NewsCard key={`${item.date}-${i}`} item={item} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function isRemoteUrl(src: string): boolean {
   return src.startsWith("http://") || src.startsWith("https://");
+}
+
+export function Newsroom({ news }: NewsroomProps) {
+  const sortedItems = useMemo(() => mergeAndSortNews(news), [news]);
+  const featured = sortedItems[0];
+  const rest = sortedItems.slice(1);
+
+  return (
+    <>
+      {/* Hero section: breadcrumb, heading, intro, featured latest news (editorial style) */}
+      <section
+        className="relative bg-white px-6 pt-16 pb-12 md:pt-20 md:pb-16"
+        aria-labelledby="newsroom-heading"
+      >
+        <div className="mx-auto max-w-6xl">
+          <nav aria-label="Breadcrumb" className="pt-[2rem]">
+            <ol className="flex items-center gap-2 text-sm text-[#6B7280]">
+              <li>
+                <Link href="/" className="hover:text-[#0A2E4F] text-bold text-black focus:outline-none focus:underline">
+                  Homepage
+                </Link>
+              </li>
+              <li aria-hidden>/</li>
+              <li aria-current="page" className="text-[#C2C9D6]">Newsroom</li>
+            </ol>
+          </nav>
+          <div className="grid gap-10 lg:grid-cols-2 lg:pt-[4rem] lg:gap-12 lg:items-start">
+            <div>
+              <h1
+                id="newsroom-heading"
+                className="font-[--font-poppins] text-3xl font-bold text-[#0A2E4F] md:text-4xl lg:text-[6rem]"
+              >
+                Newsroom
+              </h1>
+              <p className="mt-4 text-lg text-[#333333]">
+                Our latest <span className="text-[#117A8B] font-semibold">news</span>.
+              </p>
+              {featured && (
+                <div className="mt-8 lg:mt-[10rem] lg:pb-[5rem]">
+                  {/* <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+                    Latest News
+                  </p> */}
+                  <h2 className="mt-2 font-[--font-poppins] text-xl font-bold text-[#0A2E4F] md:text-2xl leading-tight">
+                    {featured.title || "Latest update"}
+                  </h2>
+                  {featured.date && (
+                    <time
+                      dateTime={featured.date.replace(/\s/g, "-")}
+                      className="mt-2 block text-sm font-semibold uppercase tracking-wider text-[#117A8B]"
+                    >
+                      {featured.date}
+                    </time>
+                  )}
+                  <p className="mt-3 text-[#333333] leading-relaxed line-clamp-3">
+                    {featured.description}
+                  </p>
+                </div>
+              )}
+            </div>
+            {featured?.image && (
+              <div className="relative aspect-video overflow-hidden rounded-xl bg-[#F4F6F8] lg:aspect-[4/3] lg:mt-[10rem] lg:min-h-[280px]">
+                <Image
+                  src={featured.image}
+                  alt={featured.title || "Latest news"}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  unoptimized={isRemoteUrl(featured.image)}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Additional news list (newest → oldest) */}
+      <section
+        id="newsroom"
+        className="relative bg-[#F4F6F8] px-6 py-16 md:py-24"
+        aria-labelledby="all-news-heading"
+      >
+        <div className="mx-auto max-w-6xl">
+          <h2
+            id="all-news-heading"
+            className="font-[--font-poppins] text-2xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-3xl"
+          >
+            All articles
+          </h2>
+          {rest.length === 0 ? (
+            <p className="mt-6 text-[#333333]">No additional articles at this time.</p>
+          ) : (
+            <div className="mt-10 space-y-6">
+              {rest.map((item, i) => (
+                <NewsCard key={`${item.date}-${i}-${item.description.slice(0, 30)}`} item={item} />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </>
+  );
 }

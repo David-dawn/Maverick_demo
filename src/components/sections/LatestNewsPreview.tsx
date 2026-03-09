@@ -7,7 +7,12 @@ import { motion } from "framer-motion";
 import type { NewsroomItem } from "@/types/newsroom";
 
 const DEFAULT_NEWS: NewsroomItem[] = [
-  { title: "", date: "21st December 2021", description: "A Cooperation Agreement has been signed in Abuja between Maverick Energy Partners and PowerChina International for the development of the 460MW Grand Katsina-Ala hydropower project in Benue State, Nigeria.", image: "/mep-media/image14.png" },
+   {
+    title: "",
+    date: "",
+    description: "A delegation paid a courtesy visit to the Governor of Benue State to brief the state government on the proposed concession of the Grand Katsina-Ala Hydroelectric Power Project (GKHPP) and seek the state’s support for the initiative. The meeting provided an opportunity to outline the objectives of the concession, underscore the project’s strategic importance, and highlight its potential benefits for Benue State and its surrounding communities.",
+    image: "/mep-media/image19.png",
+  },
   { title: "", date: "22nd August 2025", description: "Key milestone achieved with the issuance of the Full Business Case (FBC) Compliance Certificate to FMWR&S, authorizing the project development concession.", image: "/mep-media/image15.png" },
   { title: "", date: "10th December 2025", description: "The Federal Executive Council approved the Contract for the Development and Concession of the 460MW Katsina-Ala Dam and Hydropower Plant Project in favour of Maverick Energy Partners Limited.", image: "/mep-media/image16.jpeg" },
 ];

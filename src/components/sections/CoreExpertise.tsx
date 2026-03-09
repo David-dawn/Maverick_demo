@@ -14,11 +14,11 @@ import {
 } from "lucide-react";
 
 const expertise = [
-  { title: "Hydropower Engineering", description: "Design, planning, and implementation of efficient and environmentally sustainable hydroelectric power projects.", icon: Zap },
-  { title: "Dam Engineering", description: "Development of safe and reliable dams for water supply, flood control, and irrigation purposes.", icon: Mountain },
+  { title: "Hydropower Engineering", description: "Design, planning, and implementation of efficient and environmentally sustainable hydroelectric power projects, Including HV/LV Transmission lines.", icon: Zap },
+  { title: "Dam Engineering", description: "Development of safe and reliable dams for water supply, flood control, and Dam safety.", icon: Mountain },
   { title: "Irrigation Development", description: "Optimal water resource utilization, improved agricultural productivity, and sustainable farming systems.", icon: Droplets },
   { title: "Maritime Transport Engineering", description: "Planning and design of ports, harbors, navigational channels, and coastal protection infrastructure.", icon: Ship },
-  { title: "Construction Supervision", description: "Quality control, timely execution, and cost efficiency throughout construction.", icon: ClipboardCheck },
+  { title: "Construction Supervision", description: "Quality control, timely execution, and Cost efficiency (value for money) throughout the construction lifecycle.", icon: ClipboardCheck },
   { title: "Operation & Maintenance", description: "Power station performance optimization, reduced downtime, and asset longevity.", icon: Wrench },
   { title: "Project Management", description: "Seamless coordination from project initiation through completion.", icon: FolderKanban },
 ];
@@ -30,9 +30,9 @@ const secondaryExpertise = expertise.slice(PRIMARY_COUNT);
 const expertiseImages: { src: string; alt: string; remote?: boolean }[] = [
   { src: "/expertise/hydropower.jpg", alt: "Hydropower engineering" },
   { src: "/expertise/dam.jpg", alt: "Dam engineering" },
-  { src: "/expertise/irrigation.jpg", alt: "Irrigation development" },
-  { src: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80", alt: "Maritime port engineering", remote: true },
-  { src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&q=80", alt: "Construction supervision", remote: true },
+  { src: "/expertise/irrigation2.jpg", alt: "Irrigation development" },
+  { src: "/expertise/maritime.jpeg", alt: "Maritime port engineering", remote: true },
+  { src: "/mep-media/zungeru.jpg", alt: "Construction supervision", remote: true },
 ];
 
 const ROTATE_INTERVAL_MS = 5000;

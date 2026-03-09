@@ -6,7 +6,7 @@ const services = [
   {
     title: "Hydropower Engineering",
     description:
-      "Design, planning, and implementation of efficient and environmentally sustainable hydroelectric power projects.",
+      "Design, planning, and implementation of efficient and environmentally sustainable hydroelectric power projects, Including HV/LV Transmission lines.",
   },
   {
     title: "Dam Engineering",

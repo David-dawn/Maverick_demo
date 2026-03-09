@@ -71,8 +71,8 @@ export function AboutHero() {
             About Us
           </h1>
     <p className="mt-4 text-[24px] font-bold text-white/90 leading-[1.2]">
-  Our mission and vision to<br className="block md:hidden" />
-  engineering a sustainable hydropower future.
+  Our mission and vision are <br className="block md:hidden" />
+  to engineer a sustainable engineering future
 </p>
         </div>
       </div>
