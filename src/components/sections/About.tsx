@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Image from "next/image";
 import { Zap, Target, Leaf, Users, Award, Shield } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -159,89 +160,168 @@ export function About() {
     <section
       ref={sectionRef}
       id="about"
-      className="relative overflow-hidden bg-[#F4F6F8] px-6 py-20 md:py-28"
+      className="relative overflow-hidden bg-background px-6 py-20 md:py-28"
       aria-labelledby="about-heading"
     >
       {/* Subtle gradient / divider */}
       <div
-        className="absolute right-0 top-0 h-full w-1/3 max-w-md bg-gradient-to-l from-[#0A2E4F]/[0.03] to-transparent pointer-events-none"
+        className="absolute right-0 top-0 h-full w-1/3 max-w-md bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"
         aria-hidden
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <h2
-          id="about-heading"
-          className="font-[family-name:var(--font-poppins)] text-3xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-4xl"
-        >
-          About Us
-        </h2>
-
-        {/* Short intro */}
+        {/* Two-column intro: large statement left, paragraphs right */}
         <div
           ref={introRef}
-          className="mt-10 max-w-3xl space-y-5 text-[#333333] leading-relaxed"
+          className="grid gap-10 md:grid-cols-2 md:gap-12 md:items-start lg:gap-16"
         >
-          <p className="text-lg leading-[1.7]">
-            <strong className="text-[#0A2E4F]">MAVERICK Energy Partners (MEP)</strong> is a specialized hydropower project development and consulting firm backed by over 100 years of combined industry experience. Our team delivers end-to-end solutions—from feasibility and engineering design to construction supervision and operational support—for government agencies, corporations, and investors worldwide.
-          </p>
-          <p className="leading-[1.7]">
-            We combine technical excellence with a strong commitment to sustainability and social responsibility, positioning <strong className="text-[#0A2E4F]">MEP</strong> as a trusted partner in shaping the future of sustainable hydropower development.
-          </p>
+          {/* Left: large headline with mixed colors */}
+          <h2
+            id="about-heading"
+            className="font-[--font-poppins] text-2xl font-bold leading-tight text-[#6B7280] md:text-3xl lg:text-4xl xl:text-[2.75rem] xl:leading-[1.2]"
+          >
+            Maverick Energy Partners is more than ever{" "}
+            <span className="text-secondary">your engineering partner</span> for realising{" "}
+            <span className="text-secondary">sustainable</span>,{" "}
+            <span className="text-secondary">competitive</span> and{" "}
+            <span className="text-secondary">reliable projects</span> — wherever they are.
+          </h2>
+
+          {/* Right: paragraphs with bold highlights */}
+          <div className="space-y-6 text-text leading-relaxed">
+            <p className="text-base md:text-lg leading-[1.7]">
+              <strong className="text-primary">MAVERICK Energy Partners (MEP)</strong> is a{" "}
+              <strong className="text-primary">global engineering and consulting</strong> company delivering{" "}
+              <strong className="text-primary">integrated solutions</strong> for{" "}
+              <strong className="text-primary">sustainable energy and built environment projects</strong>. Our expertise is trusted worldwide across multiple markets like nuclear, renewables, power & gas, electrical grids, hydropower & dams, water resources & supply, desalination, complex & high-tech buildings, transport infrastructures, and ports & waterways.
+            </p>
+            <p className="text-base md:text-lg leading-[1.7]">
+              By connecting{" "}
+              <strong className="text-primary">strategy, design, engineering, social & environmental studies, project management and in-house digital applications</strong>, we partner with companies and public authorities to create a positive impact on people and planet.
+            </p>
+            <p className="text-base md:text-lg leading-[1.7]">
+              Backed by <strong className="text-primary">more than 100 years of experience</strong>, today MEP is a community of <strong className="text-primary">passionate experts</strong> across the globe, committed to ethical business and the fight against climate change. Maverick Energy Partners is your trusted partner for <strong className="text-primary">sustainable hydropower development</strong>.
+            </p>
+          </div>
         </div>
 
-        {/* Mission & Vision */}
+        {/* Mission & Vision - asymmetric layout with heading, accent lines, and image cards */}
         <div
           ref={missionRef}
-          className="mt-16 grid gap-10 md:mt-24 md:grid-cols-2 md:gap-12"
+          className="mt-16 md:mt-24"
         >
-          <div className="rounded-xl border border-[#E5E7EB] bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#117A8B]/10 text-[#117A8B]">
-                <Target className="h-6 w-6" aria-hidden />
-              </div>
-              <h3 className="font-[family-name:var(--font-poppins)] text-xl font-bold uppercase tracking-wide text-[#0A2E4F]">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-12 lg:gap-y-14 lg:items-start">
+            {/* Top left: large heading + accent lines */}
+            <div className="space-y-4">
+              <h3 className="font-[--font-poppins] text-3xl font-bold leading-tight text-primary md:text-4xl lg:text-[2.5rem]">
                 Our Mission
+                <br />
+                & Vision
               </h3>
-            </div>
-            <p className="mt-5 leading-[1.75] text-[#333333]">
-              To deliver world-class hydropower and dam engineering services that advance clean energy, drive economic growth, and uphold the highest standards of safety, quality, and environmental stewardship for our clients and communities.
-            </p>
-          </div>
-          <div className="rounded-xl border border-[#E5E7EB] bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#117A8B]/10 text-[#117A8B]">
-                <Zap className="h-6 w-6" aria-hidden />
+              <div className="flex flex-col gap-1">
+                <span className="h-1 w-24 rounded-full bg-secondary" aria-hidden />
+                <span className="h-0.5 w-20 rounded-full bg-secondary/60" aria-hidden />
               </div>
-              <h3 className="font-[family-name:var(--font-poppins)] text-xl font-bold uppercase tracking-wide text-[#0A2E4F]">
-                Our Vision
-              </h3>
             </div>
-            <p className="mt-5 leading-[1.75] text-[#333333]">
-              A world where sustainable hydropower is a cornerstone of reliable, affordable, and clean energy—with Maverick Energy Partners recognized as the partner of choice for complex, high-impact projects.
-            </p>
+
+            {/* Top right: Mission card - light gray bg, circular image left of text */}
+            <div className="relative flex flex-col sm:flex-row items-start gap-6 rounded-2xl bg-[#F5F5F5] p-6 md:p-8 overflow-hidden">
+              <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-md sm:h-40 sm:w-40">
+                <Image
+                  src="/mep-media/zungeru.jpg"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="160px"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h4 className="font-[--font-poppins] text-xl font-bold text-primary">
+                  Mission
+                </h4>
+                <p className="mt-3 text-text leading-relaxed">
+                  To deliver world-class hydropower and dam engineering services that advance clean energy, drive economic growth, and uphold the highest standards of safety, quality, and environmental stewardship for our clients and communities.
+                </p>
+              </div>
+            </div>
+
+            {/* Bottom left: Vision card - light gray bg, circular image right of text */}
+            <div className="relative flex flex-col sm:flex-row-reverse items-start gap-6 rounded-2xl bg-[#F5F5F5] p-6 md:p-8 overflow-hidden lg:col-start-1">
+              <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-md sm:h-40 sm:w-40">
+                <Image
+                  src="/mep-media/vision.jpg"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="160px"
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h4 className="font-[--font-poppins] text-xl font-bold text-primary">
+                  Vision
+                </h4>
+                <p className="mt-3 text-text leading-relaxed">
+                  A world where sustainable hydropower is a cornerstone of reliable, affordable, and clean energy—with Maverick Energy Partners recognized as the partner of choice for complex, high-impact projects.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Key Statistics */}
-        <div ref={statsRef} className="mt-16 md:mt-24">
-          <h3 className="font-[family-name:var(--font-poppins)] text-2xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-3xl">
-            Key Statistics
-          </h3>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {STATS.map((stat, i) => (
-              <div
-                key={stat.label}
-                className="rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-[#117A8B]/20"
+        {/* Key Statistics - full-width dark section, two columns, gradient stat cards */}
+        <div
+          ref={statsRef}
+          className="relative left-1/2 -ml-[50vw] w-screen mt-16 md:mt-24 px-6 py-16 md:py-24 bg-primary overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A2E4F] via-[#0A2E4F] to-[#117A8B]/20 pointer-events-none" aria-hidden />
+          <div className="relative mx-auto max-w-6xl grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
+            {/* Left column: heading, description, CTAs */}
+            <div className="space-y-6">
+              <p className="text-xs font-semibold uppercase tracking-wider text-white/70">
+                Track record
+              </p>
+              <h3
+                id="key-statistics-heading"
+                className="font-[--font-poppins] text-3xl font-bold text-white md:text-4xl"
               >
-                <p className="font-[family-name:var(--font-poppins)] text-3xl font-bold text-[#0A2E4F] md:text-4xl">
-                  <span data-stat-value>0</span>
-                  {stat.suffix}
-                </p>
-                <p className="mt-2 text-sm font-medium text-[#117A8B] uppercase tracking-wider">
-                  {stat.label}
-                </p>
+                Key Statistics
+              </h3>
+              <p className="max-w-lg text-white/90 leading-relaxed">
+                Our expertise is backed by decades of combined experience, successful project delivery, and a global footprint across hydropower and infrastructure markets.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href="/projects"
+                  className="inline-flex rounded-lg bg-[#117A8B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2 focus:ring-offset-[#0A2E4F]"
+                >
+                  View Projects
+                </Link>
+                <Link
+                  href="/newsroom#contact"
+                  className="inline-flex rounded-lg border-2 border-[#117A8B] bg-transparent px-6 py-3 font-semibold text-white transition-colors hover:bg-[#117A8B]/10 focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2 focus:ring-offset-[#0A2E4F]"
+                >
+                  Contact Us
+                </Link>
               </div>
-            ))}
+            </div>
+
+            {/* Right column: 2x2 grid of stat cards */}
+            <div className="grid grid-cols-2 gap-4 sm:gap-6" aria-labelledby="key-statistics-heading">
+              {STATS.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className="rounded-3xl p-8 text-center transition-all duration-300 hover:scale-[1.03] flex flex-col justify-center min-h-[140px] sm:min-h-[160px] bg-gradient-to-br from-cyan-400/90 to-emerald-400/90 odd:from-cyan-400/85 odd:to-teal-400/90 even:from-emerald-400/85 even:to-cyan-500/90"
+                >
+                  <p className="font-[--font-poppins] text-4xl font-bold tabular-nums text-[#0A2E4F] sm:text-5xl">
+                    <span data-stat-value>0</span>
+                    {stat.suffix}
+                  </p>
+                  <p className="mt-2 text-sm font-medium text-[#0A2E4F]/80 leading-snug">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

@@ -3,15 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Youtube, Instagram, Linkedin } from "lucide-react";
-
-const nav = [
-  { label: "About", href: "#about" },
-  { label: "Team", href: "#team" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Newsroom", href: "#newsroom" },
-  { label: "Contact", href: "#contact" },
-];
+import { navLinks } from "@/data/navigation";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -37,7 +29,7 @@ export function Footer() {
           </div>
           <nav aria-label="Footer navigation">
             <ul className="flex flex-wrap justify-center gap-6 md:gap-8">
-              {nav.map((item) => (
+              {navLinks.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}

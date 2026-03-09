@@ -8,7 +8,7 @@ const executives = [
   {
     name: "Engineer Dr. Johnson Bamidele Olorunnisola Adewumi FNSE",
     title: "Executive Chairman and Founder",
-    image: "/mep-media/image3.png",
+    image: "/mep-media/md.jpg",
     bio: [
       "Executive Chairman and Founder of the project development team, is a highly accomplished Chartered Engineer with over 45 years of experience in Civil Engineering, Water Resources, Hydropower, Infrastructure Development, Project Management, Policy Formulation, Research, and Training. He received his academic training from prestigious institutions including Imperial College London and the University of Lagos.",
       "He has played key roles in the planning, design, and execution of major national projects such as the Gurara Multipurpose Dam, 700MW Zungeru Dam, 3,050MW Mambilla Dam, Goronyo Dam, Jibya Dam, Swashi Dam and Irrigation Project, Ilushi Ega Irrigation Project, Kampe Dam and Irrigation Project, and the Lower & Middle Ogun Irrigation Project. He also served as National Project Coordinator for Federal Government River Training Works (1982–1985), Hydrological Rapporteur for WMO–RA1 (1984–1986), and President of the Nigerian Committee on Large Dams (2019–2022).",

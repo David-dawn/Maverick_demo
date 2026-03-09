@@ -2,21 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { label: "About", href: "#about" },
-  { label: "Team", href: "#team" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Newsroom", href: "#newsroom" },
-  { label: "Contact", href: "#contact" },
-];
+import { navLinks } from "@/data/navigation";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -31,14 +25,14 @@ export function Header() {
       }`}
       role="banner"
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="#" className="shrink-0" aria-label="Maverick Energy Partners home">
+      <div className="mx-auto flex max-w-6xl  items-center justify-between py-4">
+        <Link href="/" className="shrink-0" aria-label="Maverick Energy Partners home">
           <Image
             src="/mep-media/maverick_logo.png"
             alt="Maverick Energy Partners"
             width={160}
             height={44}
-            className="h-10 w-auto object-contain"
+            className="h-10 w-auto object-contain -ml-14 lg:mr-56"
           />
         </Link>
         <nav className="hidden md:block" aria-label="Main navigation">
@@ -47,7 +41,11 @@ export function Header() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm font-medium text-white/90 hover:text-white focus:underline focus:outline-none"
+                  className={`text-sm font-medium focus:outline-none focus:underline ${
+                    pathname === item.href || pathname?.startsWith(item.href)
+                      ? "text-white"
+                      : "text-white/90 hover:text-white"
+                  }`}
                 >
                   {item.label}
                 </Link>
