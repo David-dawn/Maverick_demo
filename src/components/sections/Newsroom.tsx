@@ -135,69 +135,95 @@ export function Newsroom({ news }: NewsroomProps) {
   const featured = sortedItems[0];
   const rest = sortedItems.slice(1);
 
+  const featuredFitImage = featured && "fitImageFull" in featured && featured.fitImageFull;
+
   return (
     <>
-      {/* Hero section: breadcrumb, heading, intro, featured latest news (editorial style) */}
+      {/* Hero section: breadcrumb, heading, intro, image, featured news (mobile: image before description) */}
       <section
         className="relative bg-white px-6 pt-16 pb-12 md:pt-20 md:pb-16"
         aria-labelledby="newsroom-heading"
       >
         <div className="mx-auto max-w-6xl">
-          <nav aria-label="Breadcrumb" className="pt-[2rem]">
+          <motion.nav
+            aria-label="Breadcrumb"
+            className="hidden lg:flex lg:pt-[2rem]"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
             <ol className="flex items-center gap-2 text-sm text-[#6B7280]">
               <li>
-                <Link href="/" className="hover:text-[#0A2E4F] text-bold text-black focus:outline-none focus:underline">
+                <Link href="/" className="hover:text-[#0A2E4F] font-semibold text-black focus:outline-none focus:underline">
                   Homepage
                 </Link>
               </li>
               <li aria-hidden>/</li>
               <li aria-current="page" className="text-[#C2C9D6]">Newsroom</li>
             </ol>
-          </nav>
-          <div className="grid gap-10 lg:grid-cols-2 lg:pt-[4rem] lg:gap-12 lg:items-start">
-            <div>
+          </motion.nav>
+          {/* Grid: mobile = heading, intro, IMAGE, featured details. Desktop = (heading+intro, featured) | image */}
+          <div className="grid grid-cols-1 gap-8 pt-[4rem]  lg:grid-cols-2 lg:pt-[4rem] lg:gap-12 lg:items-start">
+            {/* Block A: heading + intro — mobile order 1, lg col 1 row 1 */}
+            <motion.div
+              className="order-1 lg:row-start-1"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
               <h1
                 id="newsroom-heading"
-                className="font-[--font-poppins] text-3xl font-bold text-[#0A2E4F] md:text-4xl lg:text-[6rem]"
+                className="font-[--font-poppins] text-[3rem] font-bold text-black md:text-4xl lg:text-[6rem]"
               >
                 Newsroom
               </h1>
               <p className="mt-4 text-lg text-[#333333]">
                 Our latest <span className="text-[#117A8B] font-semibold">news</span>.
               </p>
-              {featured && (
-                <div className="mt-8 lg:mt-[10rem] lg:pb-[5rem]">
-                  {/* <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
-                    Latest News
-                  </p> */}
-                  <h2 className="mt-2 font-[--font-poppins] text-xl font-bold text-[#0A2E4F] md:text-2xl leading-tight">
-                    {featured.title || "Latest update"}
-                  </h2>
-                  {featured.date && (
-                    <time
-                      dateTime={featured.date.replace(/\s/g, "-")}
-                      className="mt-2 block text-sm font-semibold uppercase tracking-wider text-[#117A8B]"
-                    >
-                      {featured.date}
-                    </time>
-                  )}
-                  <p className="mt-3 text-[#333333] leading-relaxed line-clamp-3">
-                    {featured.description}
-                  </p>
-                </div>
-              )}
-            </div>
+            </motion.div>
+
+            {/* Block B: featured image — mobile order 2, lg col 2 spanning 2 rows */}
             {featured?.image && (
-              <div className="relative aspect-video overflow-hidden rounded-xl bg-[#F4F6F8] lg:aspect-[4/3] lg:mt-[10rem] lg:min-h-[280px]">
+              <motion.div
+                className="relative order-2 aspect-video overflow-hidden rounded-xl bg-[#F4F6F8] lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:aspect-[4/3] lg:min-h-[280px] lg:mt-[10rem]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+              >
                 <Image
                   src={featured.image}
                   alt={featured.title || "Latest news"}
                   fill
-                  className="object-cover"
+                  className={featuredFitImage ? "object-contain" : "object-cover"}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   unoptimized={isRemoteUrl(featured.image)}
                 />
-              </div>
+              </motion.div>
+            )}
+
+            {/* Block C: featured news details — mobile order 3, lg col 1 row 2 */}
+            {featured && (
+              <motion.div
+                className="order-3 mt-6 lg:mt-[10rem] lg:row-start-2 lg:pb-[5rem]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.35 }}
+              >
+                <h2 className="font-[--font-poppins] text-xl font-bold text-[#0A2E4F] md:text-2xl leading-tight">
+                  {featured.title || "Latest update"}
+                </h2>
+                {featured.date && (
+                  <time
+                    dateTime={featured.date.replace(/\s/g, "-")}
+                    className="mt-2 block text-sm font-semibold uppercase tracking-wider text-[#117A8B]"
+                  >
+                    {featured.date}
+                  </time>
+                )}
+                <p className="mt-3 text-[#333333] leading-relaxed line-clamp-3">
+                  {featured.description}
+                </p>
+              </motion.div>
             )}
           </div>
         </div>
