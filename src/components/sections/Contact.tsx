@@ -1,7 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Youtube, Instagram, Linkedin } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Youtube, Instagram, Linkedin, Phone, Mail } from "lucide-react";
 
 const offices = [
   {
@@ -38,85 +39,107 @@ const social = [
   },
 ];
 
+function OfficeCard({ office }: { office: any }) {
+  const [isActive, setIsActive] = useState(false);
+  const [showPhone, setShowPhone] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
+
+  const handleClick = () => {
+    setIsActive(!isActive);
+    setShowPhone(false);
+    setShowEmail(false);
+  };
+
+  return (
+    <motion.div
+      layout
+      onClick={handleClick}
+      className="cursor-pointer rounded-xl border border-gray-200 p-8 shadow-sm transition hover:shadow-md"
+    >
+      <h3 className="text-lg font-semibold uppercase tracking-wider text-secondary">
+        {office.region}
+      </h3>
+
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mt-4 overflow-hidden"
+          >
+            <p className="font-semibold text-primary">{office.country}</p>
+            <p className="mt-2 text-text">{office.address}</p>
+
+            {/* PHONE */}
+            <div className="mt-5 flex items-center gap-3">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowPhone(!showPhone);
+                }}
+                className="flex items-center justify-center rounded-full bg-primary/10 p-2 hover:bg-primary hover:text-white"
+              >
+                <Phone size={18} />
+              </button>
+              {showPhone && (
+                <a
+                  href={`tel:${office.phone.replace(/\s/g, "")}`}
+                  className="text-sm text-text hover:text-secondary"
+                >
+                  {office.phone}
+                </a>
+              )}
+            </div>
+
+            {/* EMAIL */}
+            <div className="mt-3 flex items-center gap-3">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowEmail(!showEmail);
+                }}
+                className="flex items-center justify-center rounded-full bg-primary/10 p-2 hover:bg-primary hover:text-white"
+              >
+                <Mail size={18} />
+              </button>
+              {showEmail && (
+                <a
+                  href={`mailto:${office.email}`}
+                  className="text-sm text-text hover:text-secondary"
+                >
+                  {office.email}
+                </a>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 export function Contact() {
   return (
-    <section
-      id="contact"
-      className="relative bg-white px-6 py-20 md:py-28"
-      aria-labelledby="contact-heading"
-    >
+    <section id="contact" className="relative bg-white px-6 py-20 md:py-28">
       <div className="mx-auto max-w-6xl">
-
-        <motion.h2
-          id="contact-heading"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl"
-        >
+        <h2 className="font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl">
           Contact Us
-        </motion.h2>
+        </h2>
 
-        {/* Offices */}
+        {/* LEFT RIGHT LAYOUT */}
         <div className="mt-14 grid gap-8 md:grid-cols-2">
-
-          {offices.map((office, i) => (
-            <motion.div
-              key={office.region}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-              viewport={{ once: true }}
-              className="rounded-xl border border-gray-200 p-8 shadow-sm transition hover:shadow-md"
-            >
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-secondary">
-                {office.region}
-              </h3>
-
-              <p className="mt-2 font-semibold text-primary">
-                {office.country}
-              </p>
-
-              <p className="mt-2 text-text leading-relaxed">
-                {office.address}
-              </p>
-
-              <div className="mt-6 space-y-2 text-sm">
-                <p>
-                  <span className="font-semibold text-primary">
-                    Phone:
-                  </span>{" "}
-                  <a
-                    href={`tel:${office.phone.replace(/\s/g, "")}`}
-                    className="text-text hover:text-secondary"
-                  >
-                    {office.phone}
-                  </a>
-                </p>
-
-                <p>
-                  <span className="font-semibold text-primary">
-                    Email:
-                  </span>{" "}
-                  <a
-                    href={`mailto:${office.email}`}
-                    className="text-text hover:text-secondary"
-                  >
-                    {office.email}
-                  </a>
-                </p>
-              </div>
-            </motion.div>
+          {offices.map((office) => (
+            <OfficeCard key={office.region} office={office} />
           ))}
         </div>
 
-        {/* Social */}
+        {/* SOCIAL */}
         <div className="mt-12">
           <h3 className="text-sm font-semibold uppercase tracking-wider text-secondary">
             Social Media
           </h3>
-
           <ul className="mt-4 flex items-center gap-5">
             {social.map(({ label, url, icon: Icon }) => (
               <li key={label}>
@@ -133,7 +156,6 @@ export function Contact() {
             ))}
           </ul>
         </div>
-
       </div>
     </section>
   );

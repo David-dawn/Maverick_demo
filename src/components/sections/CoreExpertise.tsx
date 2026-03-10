@@ -30,7 +30,7 @@ const secondaryExpertise = expertise.slice(PRIMARY_COUNT);
 const expertiseImages: { src: string; alt: string; remote?: boolean }[] = [
   { src: "/expertise/hydropower.jpg", alt: "Hydropower engineering" },
   { src: "/expertise/dam.jpg", alt: "Dam engineering" },
-  { src: "/expertise/irrigation2.jpg", alt: "Irrigation development" },
+  { src: "/expertise/irrigation.jpg", alt: "Irrigation development" },
   { src: "/expertise/maritime.jpeg", alt: "Maritime port engineering", remote: true },
   { src: "/mep-media/zungeru.jpg", alt: "Construction supervision", remote: true },
 ];
