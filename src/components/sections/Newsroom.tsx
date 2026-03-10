@@ -6,7 +6,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { NewsroomItem } from "@/types/newsroom";
 
-/** Fallback when Firestore is empty or fails. Do not remove. */
+/** Fallback when Firestore is empty or fails.  */
 const DEFAULT_NEWS: NewsroomItem[] = [
   {
     title: "",
@@ -32,14 +32,14 @@ const DEFAULT_NEWS: NewsroomItem[] = [
   },
   {
     title: "",
-    date: "",
+    date: "20th November 2023",
     description:
       "Engagements were held with the Federal Ministry of Water Resources and Sanitation (FMWR&S) on the proposed concession of the Grand Katsina-Ala Hydroelectric Power Project (GKHPP). The discussions focused on exploring a Public-Private Partnership (PPP) framework to support the development, operation, and long-term sustainability of the hydropower project",
     image: "/mep-media/image18.png",
   },
   {
     title: "",
-    date: "",
+    date: "25th September 2024",
     description:
       "A delegation paid a courtesy visit to the Governor of Benue State to brief the state government on the proposed concession of the Grand Katsina-Ala Hydroelectric Power Project (GKHPP) and seek the state's support for the initiative. The meeting provided an opportunity to outline the objectives of the concession, underscore the project's strategic importance, and highlight its potential benefits for Benue State and its surrounding communities.",
     image: "/mep-media/image19.png",
@@ -47,10 +47,9 @@ const DEFAULT_NEWS: NewsroomItem[] = [
 ];
 
 type NewsroomProps = {
-  /** From Firestore; when provided, merged with default news and sorted by date. */
+  /** From Firestore; when empty or null/undefined, fallback to DEFAULT_NEWS. */
   news?: NewsroomItem[] | null;
 };
-
 
 function parseDateForSort(dateStr: string): number {
   if (!dateStr || !dateStr.trim()) return 0;
@@ -59,10 +58,11 @@ function parseDateForSort(dateStr: string): number {
   return isNaN(d.getTime()) ? 0 : d.getTime();
 }
 
-/** Merge Firestore news with default, sort newest first. */
+/** Use Firestore news when non-empty; otherwise use fallback. Sort newest first. */
 function mergeAndSortNews(firestoreNews: NewsroomItem[] | null | undefined): NewsroomItem[] {
-  const merged: NewsroomItem[] = [...(firestoreNews ?? []), ...DEFAULT_NEWS];
-  return merged.sort((a, b) => parseDateForSort(b.date) - parseDateForSort(a.date));
+  const source =
+    firestoreNews != null && firestoreNews.length > 0 ? firestoreNews : DEFAULT_NEWS;
+  return [...source].sort((a, b) => parseDateForSort(b.date) - parseDateForSort(a.date));
 }
 
 function NewsCard({ item }: { item: NewsroomItem }) {

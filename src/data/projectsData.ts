@@ -85,8 +85,9 @@ export const projectsData: ProjectEntry[] = [
   },
   {
     name: "40MW Kashimbila Hydroelectric Power",
-    client: "Federal Ministry of Power",
+    client: "Federal Ministry of Water Resources ",
     scope: [
+      "Operation and Maintenance",
       "Multipurpose dam and hydropower development",
       "40MW Hydropower Plant",
       "Water supply and flood control components",

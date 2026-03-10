@@ -6,7 +6,7 @@ const COLLECTION = "newsroom";
 
 /**
  * Fetches newsroom entries from Firestore (server-side).
- * Expects field createdAT (timestamp) for ordering; falls back to unordered fetch if needed.
+ * Expects field createdAt (timestamp) for ordering; falls back to unordered fetch if needed.
  * Returns empty array on missing config, empty collection, or error → caller uses fallback.
  */
 export async function getNewsroomNews(): Promise<NewsroomItem[]> {
@@ -22,9 +22,9 @@ export async function getNewsroomNews(): Promise<NewsroomItem[]> {
     const coll = collection(db, COLLECTION);
     let snapshot;
     try {
-      const q = query(coll, orderBy("createdAT", "desc"));
+      const q = query(coll, orderBy("createdAt", "desc"));
       snapshot = await getDocs(q);
-      console.log("[getNewsroomNews] query with orderBy(createdAT) succeeded, snapshot.size:", snapshot.size);
+      console.log("[getNewsroomNews] query with orderBy(createdAt) succeeded, snapshot.size:", snapshot.size);
     } catch (orderByErr) {
       console.log("[getNewsroomNews] orderBy failed, falling back to getDocs(coll). Error:", orderByErr);
       snapshot = await getDocs(coll);

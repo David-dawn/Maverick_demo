@@ -3,31 +3,40 @@
 import { motion } from "framer-motion";
 import { Youtube, Instagram, Linkedin } from "lucide-react";
 
-const contact = {
-  address: "81, Rue Jouffroy d'Abbans, Paris 75017. France",
-  phones: ["+33 (60) 795 32 10", "+234 814 278 08 11"],
-  emails: [
-    "france@maverickenergypartners.net",
-    "nigeria@maverickenergypartners.net",
-  ],
-  social: [
-    {
-      label: "YouTube",
-      url: "https://www.youtube.com/@MaverickEnergyPartners",
-      icon: Youtube,
-    },
-    {
-      label: "Instagram",
-      url: "https://www.instagram.com/maverickenergy_partners/",
-      icon: Instagram,
-    },
-    {
-      label: "LinkedIn",
-      url: "https://www.linkedin.com/in/maverick-energy-partners-72a0a73b3/",
-      icon: Linkedin,
-    },
-  ],
-};
+const offices = [
+  {
+    region: "Europe",
+    country: "MEP, France",
+    address: "81, Rue Jouffroy d'Abbans, Paris 75017",
+    phone: "+33 (60) 795 32 10",
+    email: "france@maverickenergypartners.net",
+  },
+  {
+    region: "Africa",
+    country: "MEP, Nigeria",
+    address: "44, Lord Lugard Street, Asokoro Abuja",
+    phone: "+234 814 278 08 11",
+    email: "nigeria@maverickenergypartners.net",
+  },
+];
+
+const social = [
+  {
+    label: "YouTube",
+    url: "https://www.youtube.com/@MaverickEnergyPartners",
+    icon: Youtube,
+  },
+  {
+    label: "Instagram",
+    url: "https://www.instagram.com/maverickenergy_partners/",
+    icon: Instagram,
+  },
+  {
+    label: "LinkedIn",
+    url: "https://www.linkedin.com/in/maverick-energy-partners-72a0a73b3/",
+    icon: Linkedin,
+  },
+];
 
 export function Contact() {
   return (
@@ -37,6 +46,7 @@ export function Contact() {
       aria-labelledby="contact-heading"
     >
       <div className="mx-auto max-w-6xl">
+
         <motion.h2
           id="contact-heading"
           initial={{ opacity: 0, y: 20 }}
@@ -47,95 +57,83 @@ export function Contact() {
         >
           Contact Us
         </motion.h2>
-        <div className="mt-14 grid gap-12 lg:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            <div>
+
+        {/* Offices */}
+        <div className="mt-14 grid gap-8 md:grid-cols-2">
+
+          {offices.map((office, i) => (
+            <motion.div
+              key={office.region}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.2 }}
+              viewport={{ once: true }}
+              className="rounded-xl border border-gray-200 p-8 shadow-sm transition hover:shadow-md"
+            >
               <h3 className="text-sm font-semibold uppercase tracking-wider text-secondary">
-                Office Address
+                {office.region}
               </h3>
-              <p className="mt-2 text-text leading-relaxed">
-                {contact.address}
+
+              <p className="mt-2 font-semibold text-primary">
+                {office.country}
               </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-secondary">
-                Phone Number
-              </h3>
-              <ul className="mt-2 space-y-1">
-                {contact.phones.map((phone) => (
-                  <li key={phone}>
-                    <a
-                      href={`tel:${phone.replace(/\s/g, "")}`}
-                      className="text-text hover:text-secondary focus:underline"
-                    >
-                      {phone}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-secondary">
-                Email Address
-              </h3>
-              <ul className="mt-2 space-y-1">
-                {contact.emails.map((email) => (
-                  <li key={email}>
-                    <a
-                      href={`mailto:${email}`}
-                      className="text-text hover:text-secondary focus:underline"
-                    >
-                      {email}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-secondary">
-                Social Media
-              </h3>
-             <ul className="mt-4 flex items-center gap-5">
-  {contact.social.map(({ label, url, icon: Icon }) => (
-    <li key={label}>
-      <a
-        href={url}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={label}
-        className="group flex h-11 w-11 items-center justify-center rounded-full bg-primary/5 transition-all duration-300 hover:bg-primary hover:scale-110 focus:ring-2 focus:ring-secondary focus:ring-offset-2"
-      >
-        <Icon className="h-5 w-5 text-primary transition-colors duration-300 group-hover:text-white" />
-      </a>
-    </li>
-  ))}
-</ul>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="h-80 overflow-hidden rounded-xl bg-[#E5E7EB] lg:h-96"
-          >
-            <iframe
-              title="Maverick Energy Partners office location - 81 Rue Jouffroy d'Abbans, Paris 75017"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2622.207849082!2d2.314!3d48.884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66f7a2e3b2b2b%3A0x3b2b2b2b2b2b2b2b!2s81+Rue+Jouffroy+d%27Abbans%2C+75017+Paris!5e0!3m2!1sen!2sfr!4v1709123456789"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-full w-full"
-            />
-          </motion.div>
+
+              <p className="mt-2 text-text leading-relaxed">
+                {office.address}
+              </p>
+
+              <div className="mt-6 space-y-2 text-sm">
+                <p>
+                  <span className="font-semibold text-primary">
+                    Phone:
+                  </span>{" "}
+                  <a
+                    href={`tel:${office.phone.replace(/\s/g, "")}`}
+                    className="text-text hover:text-secondary"
+                  >
+                    {office.phone}
+                  </a>
+                </p>
+
+                <p>
+                  <span className="font-semibold text-primary">
+                    Email:
+                  </span>{" "}
+                  <a
+                    href={`mailto:${office.email}`}
+                    className="text-text hover:text-secondary"
+                  >
+                    {office.email}
+                  </a>
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Social */}
+        <div className="mt-12">
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-secondary">
+            Social Media
+          </h3>
+
+          <ul className="mt-4 flex items-center gap-5">
+            {social.map(({ label, url, icon: Icon }) => (
+              <li key={label}>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="group flex h-11 w-11 items-center justify-center rounded-full bg-primary/5 transition-all duration-300 hover:bg-primary hover:scale-110"
+                >
+                  <Icon className="h-5 w-5 text-primary group-hover:text-white" />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </div>
     </section>
   );

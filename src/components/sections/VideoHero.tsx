@@ -1,43 +1,51 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const HERO_VIDEO_SRC = "/videos/hero.mp4";
-const FALLBACK_VIDEO_SRC = "/video/ethopia.mp4";
+const HERO_VIDEOS = [
+  "/video/Dam.mp4",
+  "/video/ethopia.mp4",
+  "/video/koysha Dam.mp4",
+];
 
 export function VideoHero() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleVideoEnded = useCallback(() => {
+    setActiveIndex((i) => (i + 1) % HERO_VIDEOS.length);
+  }, []);
+
+  const currentSrc = HERO_VIDEOS[activeIndex];
+
   return (
     <section
       className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-primary"
       aria-label="Hero"
     >
-      {/* Full-bleed cinematic video layer */}
+      {/* Full-bleed video layer — no vignette or scaling; original clarity */}
       <div className="absolute inset-0 min-h-full min-w-full">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover object-center scale-105"
-          style={{ minHeight: "100%", minWidth: "100%" }}
-          aria-hidden
+        <motion.div
+          key={activeIndex}
+          className="absolute inset-0 h-full w-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <source src={HERO_VIDEO_SRC} type="video/mp4" />
-          <source src={FALLBACK_VIDEO_SRC} type="video/mp4" />
-        </video>
+          <video
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+            src={currentSrc}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            aria-hidden
+            onEnded={handleVideoEnded}
+          />
+        </motion.div>
       </div>
-      {/* Cinematic overlay: strong gradient + vignette */}
-      {/* <div
-        className="absolute inset-0 bg-linear-to-b from-black/60 via-black/50 to-black/80"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 bg-linear-to-r from-black/75 via-transparent to-black/60"
-        aria-hidden
-      /> */}
-      <div className="absolute inset-0 shadow-[inset_0_0_120px_60px_rgba(0,0,0,0.4)]" aria-hidden />
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-center px-6 py-24 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
