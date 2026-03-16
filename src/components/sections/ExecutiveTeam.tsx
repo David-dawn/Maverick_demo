@@ -18,7 +18,7 @@ const executives = [
   {
     name: "Jean BINQUET",
     title: "Technical Director",
-    image: "/mep-media/image4.png",
+    image: "/mep-media/Jean BINQUET.jpg",
     bio: [
       "Technical Director is a Chief Engineer with over 35 years of experience in the design and construction supervision of large multipurpose hydropower projects, including concrete gravity and arch dams, RCC dams, and earth and rockfill dams (CFRD). He has worked extensively with private investors, Independent Power Producers (IPPs), government agencies, river basin authorities, and municipalities.",
       "He has served as Lead Design Engineer, Contract Expert, Project Director, and Project Manager on more than 40 major hydropower projects worldwide across Africa, Europe, Asia, and the Americas. His portfolio includes landmark projects such as Gibe III (Ethiopia), Boguchanskaya (Russia), Mazar (Ecuador), Bui (Ghana), Gurara (Nigeria), Birecik (Turkey), Dul Hasti and Tehri Pumped Storage (India), Pubugou (China), and several major developments in Brazil, Argentina, Madagascar, and other countries. He has designed over 25 concrete dams (20–240m high), numerous RCC dams, and more than 25 earth and rockfill dams.",
