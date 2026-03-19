@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const services = [
   {
-    title: "Hydropower Engineering",
+    title: "Substation",
     description:
       "Design, planning, and implementation of efficient and environmentally sustainable hydroelectric power projects, Including HV/LV Transmission lines.",
   },
@@ -18,11 +18,11 @@ const services = [
     description:
       "Optimal water resource utilization, improved agricultural productivity, and sustainable farming systems.",
   },
-  {
-    title: "Maritime Transport Engineering",
-    description:
-      "Planning and design of ports, harbors, navigational channels, and coastal protection infrastructure.",
-  },
+  // {
+  //   title: "Maritime Transport Engineering",
+  //   description:
+  //     "Planning and design of ports, harbors, navigational channels, and coastal protection infrastructure.",
+  // },
   {
     title: "Construction Supervision",
     description:
@@ -44,7 +44,7 @@ const icons = [
   "⚡",
   "🏗️",
   "💧",
-  "🚢",
+  // "🚢",
   "📐",
   "🔧",
   "📋",
@@ -54,7 +54,7 @@ export function ProfessionalExperience() {
   return (
     <section
       id="experience"
-      className="relative bg-[#F4F6F8] px-6 py-20 md:py-28"
+      className="relative bg-background px-6 py-20 md:py-28"
       aria-labelledby="experience-heading"
     >
       <div className="mx-auto max-w-6xl">
@@ -64,7 +64,7 @@ export function ProfessionalExperience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="font-[family-name:var(--font-poppins)] text-3xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-4xl"
+          className="font-(family-name:var--font-poppins) text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl"
         >
           Professional Experience
         </motion.h2>
@@ -73,17 +73,17 @@ export function ProfessionalExperience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="mt-6 max-w-4xl text-[#333333] leading-relaxed"
+          className="mt-6 max-w-4xl text-text leading-relaxed"
         >
           Maverick Energy Partners (MEP) is a reputable engineering firm with over 45 years of extensive professional experience in delivering innovative, sustainable, and comprehensive engineering solutions. The firm operates across key sectors including hydropower engineering, dam engineering, irrigation development, maritime transport infrastructure, construction supervision, operation and maintenance of power stations, and full-scale project management.
         </motion.p>
-        <p className="mt-4 max-w-4xl text-[#333333] leading-relaxed">
+        <p className="mt-4 max-w-4xl text-text leading-relaxed">
           In hydropower engineering, MEP has demonstrated strong technical capability in the design, planning, and implementation of efficient and environmentally sustainable hydroelectric power projects. The firm has also played significant roles in the development of safe and reliable dams for water supply, flood control, and irrigation purposes. Its irrigation engineering expertise supports optimal water resource utilization, improved agricultural productivity, and sustainable farming systems. Additionally, MEP has contributed to maritime transport engineering through the planning and design of ports, harbors, navigational channels, and coastal protection infrastructure.
         </p>
-        <p className="mt-4 max-w-4xl text-[#333333] leading-relaxed">
+        <p className="mt-4 max-w-4xl text-text leading-relaxed">
           Beyond design and infrastructure development, MEP is recognized for excellence in construction supervision, ensuring quality control, timely execution, and cost efficiency. The company also provides operation and maintenance services for power stations, focusing on performance optimization, reduced downtime, and asset longevity. Its strong project management framework ensures seamless coordination from project initiation through completion.
         </p>
-        <p className="mt-4 max-w-4xl text-[#333333] leading-relaxed">
+        <p className="mt-4 max-w-4xl text-text leading-relaxed">
           With a firm commitment to international professional and ethical standards, MEP also prioritizes engineering mentorship and indigenous capacity development, fostering knowledge transfer and strengthening the next generation of engineering professionals. This blend of technical expertise, sustainability focus, and leadership excellence positions Maverick Energy Partners as a trusted and forward-looking partner in the engineering industry.
         </p>
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -97,10 +97,10 @@ export function ProfessionalExperience() {
               className="rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
             >
               <span className="text-3xl" aria-hidden>{icons[i]}</span>
-              <h3 className="mt-3 font-[family-name:var(--font-poppins)] text-lg font-bold text-[#0A2E4F]">
+              <h3 className="mt-3 font-(family-name:var--font-poppins) text-lg font-bold text-primary">
                 {item.title}
               </h3>
-              <p className="mt-2 text-sm text-[#333333] leading-relaxed">
+              <p className="mt-2 text-sm text-text leading-relaxed">
                 {item.description}
               </p>
             </motion.div>

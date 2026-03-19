@@ -31,7 +31,7 @@ export function CaseStudyCarousel() {
 
   return (
     <section
-      className="relative bg-[#0A2E4F] px-6 py-20 md:py-28"
+      className="relative bg-primary px-6 py-20 md:py-28"
       aria-labelledby="case-study-heading"
     >
       <div className="absolute inset-0 overflow-hidden">
@@ -53,10 +53,10 @@ export function CaseStudyCarousel() {
             />
           </motion.div>
         </AnimatePresence>
-        <div className="absolute inset-0 bg-[#0A2E4F]/85" aria-hidden />
+        <div className="absolute inset-0 bg-primary/85" aria-hidden />
       </div>
       <div className="relative z-10 mx-auto max-w-6xl">
-        <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+        <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
           Project Case Study
         </p>
         <div className="mt-14 grid gap-12 lg:grid-cols-2 lg:items-center">
@@ -67,7 +67,7 @@ export function CaseStudyCarousel() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -40 }}
               transition={{ duration: 0.35 }}
-              className="relative aspect-video overflow-hidden rounded-xl lg:aspect-auto lg:min-h-[320px]"
+              className="relative aspect-video overflow-hidden rounded-xl lg:aspect-auto lg:min-h-80"
             >
               <Image
                 src={project?.image ?? ""}
@@ -88,7 +88,7 @@ export function CaseStudyCarousel() {
               className="space-y-6 text-white"
             >
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+                <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
                   PROJECT NAME
                 </p>
                 <h2 id="case-study-heading" className="mt-2 font-[--font-poppins] text-2xl font-bold text-white md:text-3xl">
@@ -96,7 +96,7 @@ export function CaseStudyCarousel() {
                 </h2>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+                <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
                   CLIENT
                 </p>
                 <p className="mt-2 text-white/90">
@@ -104,7 +104,7 @@ export function CaseStudyCarousel() {
                 </p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+                <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
                   SCOPE
                 </p>
                 <ul className="mt-3 list-inside list-disc space-y-2 leading-relaxed text-white/90">
@@ -117,17 +117,17 @@ export function CaseStudyCarousel() {
           </AnimatePresence>
         </div>
         {/* Pagination dots */}
-        <div className="mt-10 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Case study projects">
+        <div className="mt-10 flex flex-wrap justify-center gap-2" role="group" aria-label="Case study projects">
           {projectsData.map((_, i) => (
             <button
               key={i}
               type="button"
               onClick={() => goTo(i)}
-              className={`h-2 w-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2 focus:ring-offset-[#0A2E4F] ${
-                i === currentIndex ? "w-8 bg-[#117A8B]" : "bg-white/40 hover:bg-white/60"
+              className={`h-2 w-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary ${
+                i === currentIndex ? "w-8 bg-secondary" : "bg-white/40 hover:bg-white/60"
               }`}
               aria-label={`View ${projectsData[i]?.name}`}
-              aria-selected={i === currentIndex}
+              aria-pressed={i === currentIndex}
             />
           ))}
         </div>

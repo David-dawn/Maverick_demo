@@ -15,6 +15,19 @@ export type ProjectEntry = {
 
 export const projectsData: ProjectEntry[] = [
   {
+    name: "5,150MW Grand Ethiopian Renaissance Dam",
+    client: "Ethiopian Electric Power",
+    scope: [
+      "Consultancy and advisory for large-scale hydropower",
+      "5,150MW Hydropower Plant",
+      "Transmission and energy integration components",
+    ],
+    capacity: 5150,
+    energyOutput: "15,692 GWh per annum (design)",
+    image: "/mep-media/image10.png",
+    location: "Ethiopia",
+  },
+  {
     name: "1,525MW Mambilla Hydroelectric Power",
     client: "Federal Ministry of Power",
     scope: [
@@ -44,33 +57,6 @@ export const projectsData: ProjectEntry[] = [
     location: "Nigeria",
   },
   {
-    name: "30MW Gurara Hydroelectric Power",
-    client: "Federal Ministry of Water Resources",
-    scope: [
-      "Final Engineering Design and Construction Supervision",
-      "30MW Hydropower Plant (120 GWh per year)",
-      "139km 132kV transmission line to Kaduna and 21km 33kV distribution line",
-      "330/132/33kV Substation and 2×15MVA Power Transformers",
-    ],
-    capacity: 30,
-    energyOutput: "120 GWh per annum",
-    image: "/mep-media/image8.jpeg",
-    location: "Nigeria",
-  },
-  {
-    name: "5,150MW Grand Ethiopian Renaissance Dam",
-    client: "Ethiopian Electric Power",
-    scope: [
-      "Consultancy and advisory for large-scale hydropower",
-      "5,150MW Hydropower Plant",
-      "Transmission and energy integration components",
-    ],
-    capacity: 5150,
-    energyOutput: "15,692 GWh per annum (design)",
-    image: "/mep-media/image10.png",
-    location: "Ethiopia",
-  },
-  {
     name: "450MW Cana Brava Hydroelectric Power Plant",
     client: "Cana Brava Energia S.A.",
     scope: [
@@ -95,6 +81,20 @@ export const projectsData: ProjectEntry[] = [
     capacity: 40,
     energyOutput: "Approx. 200 GWh per annum",
     image: "/mep-media/kash.png",
+    location: "Nigeria",
+  },
+  {
+    name: "30MW Gurara Hydroelectric Power",
+    client: "Federal Ministry of Water Resources",
+    scope: [
+      "Final Engineering Design and Construction Supervision",
+      "30MW Hydropower Plant (120 GWh per year)",
+      "139km 132kV transmission line to Kaduna and 21km 33kV distribution line",
+      "330/132/33kV Substation and 2x15MVA Power Transformers",
+    ],
+    capacity: 30,
+    energyOutput: "120 GWh per annum",
+    image: "/mep-media/image8.jpeg",
     location: "Nigeria",
   },
 ];

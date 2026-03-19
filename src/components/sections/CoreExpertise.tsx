@@ -7,31 +7,28 @@ import {
   Zap,
   Mountain,
   Droplets,
-  Ship,
   ClipboardCheck,
   Wrench,
   FolderKanban,
 } from "lucide-react";
 
 const expertise = [
-  { title: "Hydropower Engineering", description: "Design, planning, and implementation of efficient and environmentally sustainable hydroelectric power projects, Including HV/LV Transmission lines.", icon: Zap },
+  { title: "Substation", description: "Design, planning, and implementation of efficient and environmentally sustainable hydroelectric power projects, Including HV/LV Transmission lines.", icon: Zap },
   { title: "Dam Engineering", description: "Development of safe and reliable dams for water supply, flood control, and Dam safety.", icon: Mountain },
   { title: "Irrigation Development", description: "Optimal water resource utilization, improved agricultural productivity, and sustainable farming systems.", icon: Droplets },
-  { title: "Maritime Transport Engineering", description: "Planning and design of ports, harbors, navigational channels, and coastal protection infrastructure.", icon: Ship },
   { title: "Construction Supervision", description: "Quality control, timely execution, and Cost efficiency (value for money) throughout the construction lifecycle.", icon: ClipboardCheck },
   { title: "Operation & Maintenance", description: "Power station performance optimization, reduced downtime, and asset longevity.", icon: Wrench },
   { title: "Project Management", description: "Seamless coordination from project initiation through completion.", icon: FolderKanban },
 ];
 
-const PRIMARY_COUNT = 5;
+const PRIMARY_COUNT = 4;
 const primaryExpertise = expertise.slice(0, PRIMARY_COUNT);
 const secondaryExpertise = expertise.slice(PRIMARY_COUNT);
 
 const expertiseImages: { src: string; alt: string; remote?: boolean }[] = [
-  { src: "/expertise/hydropower.jpg", alt: "Hydropower engineering" },
+  { src: "/expertise/substation.png", alt: "Hydropower engineering" },
   { src: "/expertise/dam.jpg", alt: "Dam engineering" },
-  { src: "/expertise/irrigation.jpg", alt: "Irrigation development" },
-  { src: "/expertise/maritime.jpeg", alt: "Maritime port engineering", remote: true },
+  { src: "/expertise/irrigation.png", alt: "Irrigation development" },
   { src: "/mep-media/zungeru.jpg", alt: "Construction supervision", remote: true },
 ];
 
@@ -63,11 +60,11 @@ export function CoreExpertise() {
 
   return (
     <section
-      className="relative bg-[#F4F6F8] px-6 py-20 md:py-28"
+      className="relative bg-background px-6 py-20 md:py-28"
       aria-labelledby="expertise-heading"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+        <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
           Core Expertise
         </p>
         <motion.h2
@@ -76,7 +73,7 @@ export function CoreExpertise() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-2 font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-4xl"
+          className="mt-2 font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl"
         >
           Professional Experience
         </motion.h2>
@@ -85,7 +82,7 @@ export function CoreExpertise() {
         <div className="mt-14 grid gap-8 lg:grid-cols-[1fr,400px] lg:gap-12">
           {/* LEFT: Large image panel */}
           <div className="space-y-4">
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-[#0A2E4F] md:aspect-[16/10] lg:min-h-[380px] lg:aspect-auto">
+            <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl bg-primary md:aspect-16/10 lg:min-h-95 lg:aspect-auto">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={activeIndex}
@@ -111,7 +108,7 @@ export function CoreExpertise() {
                     />
                   </motion.div>
                   <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"
+                    className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent"
                     aria-hidden
                   />
                   <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
@@ -138,19 +135,19 @@ export function CoreExpertise() {
               </AnimatePresence>
             </div>
             {/* Pagination dots */}
-            <div className="flex justify-center gap-2 lg:justify-start" role="tablist" aria-label="Expertise slides">
+            <div className="flex justify-center gap-2 lg:justify-start" role="group" aria-label="Expertise slides">
               {primaryExpertise.map((_, i) => (
                 <button
                   key={i}
                   type="button"
                   onClick={() => goTo(i)}
-                  className={`h-2.5 w-2.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2 focus:ring-offset-[#F4F6F8] ${
+                  className={`h-2.5 w-2.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-background ${
                     i === activeIndex
-                      ? "scale-125 bg-[#117A8B]"
-                      : "bg-[#0A2E4F]/30 hover:bg-[#0A2E4F]/50"
+                      ? "scale-125 bg-secondary"
+                      : "bg-secondary/30 hover:bg-secondary/50"
                   }`}
                   aria-label={`Show ${primaryExpertise[i]?.title}`}
-                  aria-selected={i === activeIndex}
+                  aria-pressed={i === activeIndex}
                 />
               ))}
             </div>
@@ -170,24 +167,24 @@ export function CoreExpertise() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-20px" }}
                   transition={{ duration: 0.3, delay: i * 0.05 }}
-                  className={`flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2 ${
+                  className={`flex w-full items-start gap-4 rounded-xl border p-4 text-left transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 ${
                     isActive
-                      ? "border-[#117A8B]/50 bg-[#117A8B]/10 shadow-sm"
-                      : "border-[#E5E7EB] bg-white hover:border-[#117A8B]/30 hover:shadow-sm"
+                      ? "border-secondary/50 bg-secondary/10 shadow-sm"
+                      : "border-[#E5E7EB] bg-white hover:border-secondary/30 hover:shadow-sm"
                   }`}
                 >
                   <div
                     className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-lg transition-colors ${
-                      isActive ? "bg-[#117A8B] text-white" : "bg-[#117A8B]/10 text-[#117A8B]"
+                      isActive ? "bg-secondary text-white" : "bg-secondary/10 text-secondary"
                     }`}
                   >
                     <Icon className="h-5 w-5" aria-hidden />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-[--font-poppins] font-bold text-[#0A2E4F]">
+                    <h3 className="font-[--font-poppins] font-bold text-primary">
                       {item.title}
                     </h3>
-                    <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-[#333333]">
+                    <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-text">
                       {item.description}
                     </p>
                   </div>
@@ -199,7 +196,7 @@ export function CoreExpertise() {
 
         {/* SECONDARY EXPERTISE GRID */}
         <div className="mt-16">
-          <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+          <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
             Additional expertise
           </p>
           <div className="mt-6 grid gap-6 sm:grid-cols-2">
@@ -212,15 +209,15 @@ export function CoreExpertise() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="group rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm transition-all duration-300 hover:border-[#117A8B]/30 hover:shadow-md"
+                  className="group rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm transition-all duration-300 hover:border-secondary/30 hover:shadow-md"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#117A8B]/10 text-[#117A8B] transition-colors duration-300 group-hover:bg-[#117A8B]/20">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-secondary/10 text-secondary transition-colors duration-300 group-hover:bg-secondary/20">
                     <Icon className="h-6 w-6" aria-hidden />
                   </div>
-                  <h3 className="mt-4 font-[--font-poppins] text-lg font-bold text-[#0A2E4F]">
+                  <h3 className="mt-4 font-[--font-poppins] text-lg font-bold text-primary">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#333333]">
+                  <p className="mt-2 text-sm leading-relaxed text-text">
                     {item.description}
                   </p>
                 </motion.div>

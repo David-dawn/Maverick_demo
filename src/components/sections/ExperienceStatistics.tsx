@@ -2,13 +2,12 @@
 
 import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { User, Database, Globe, Cpu } from "lucide-react";
 
 const STATS = [
-  { value: 100, suffix: "+", label: "Years Combined Experience", icon: User },
-  { value: 50, suffix: "+", label: "Hydropower Projects Completed", icon: Database },
-  { value: 20, suffix: "+", label: "Countries Served", icon: Globe },
-  { value: 2, suffix: "B+", label: "Project Value Managed ($)", icon: Cpu },
+  { value: 100, suffix: "+", label: "Years Combined Experience" },
+  { value: 50, suffix: "+", label: "Hydropower Projects Completed" },
+  { value: 20, suffix: "+", label: "Countries Served" },
+  { value: 2, suffix: "B+", label: "Project Value Managed ($)" },
 ];
 
 function AnimatedNumber({ value, suffix, inView }: { value: number; suffix: string; inView: boolean }) {
@@ -40,52 +39,38 @@ export function ExperienceStatistics() {
   return (
     <section
       ref={ref}
-      className="relative bg-[#F4F6F8] px-6 py-20 md:py-28"
+      className="relative bg-background px-6 py-20 md:py-28"
       aria-labelledby="experience-stats-heading"
     >
-      <div className="mx-auto max-w-6xl rounded-[40px] bg-white px-10 py-12 shadow-sm md:px-12 md:py-16">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
-          {/* Left column: headline + description */}
-          <div>
-            <h2
-              id="experience-stats-heading"
-              className="text-3xl font-bold text-[#1F2937]"
+      <div className="mx-auto max-w-6xl">
+        <motion.h2
+          id="experience-stats-heading"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl"
+        >
+          Experience Statistics
+        </motion.h2>
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {STATS.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="rounded-xl border border-[#E5E7EB] bg-white p-8 text-center shadow-sm transition-shadow hover:shadow-md"
             >
-              Let's build something great.
-            </h2>
-            <p className="mt-4 max-w-[420px] text-gray-500 leading-relaxed">
-              Our expertise is backed by decades of combined experience, successful project delivery across hydropower and infrastructure, and a global footprint we're proud to grow with our partners.
-            </p>
-          </div>
-
-          {/* Right column: 2×2 stats grid with icon + number + label */}
-          <div className="grid grid-cols-2 gap-x-12 gap-y-8">
-            {STATS.map((stat, i) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.08 }}
-                  className="flex flex-col"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gray-100 text-gray-500">
-                      <Icon className="h-5 w-5" aria-hidden />
-                    </div>
-                    <p className="text-4xl font-bold tabular-nums text-[#374151]">
-                      <AnimatedNumber value={stat.value} suffix={stat.suffix} inView={isInView} />
-                    </p>
-                  </div>
-                  <p className="mt-2 text-sm text-gray-500">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
+              <p className="font-[--font-poppins] text-4xl font-bold tabular-nums text-secondary md:text-5xl">
+                <AnimatedNumber value={stat.value} suffix={stat.suffix} inView={isInView} />
+              </p>
+              <p className="mt-2 text-sm font-medium uppercase tracking-wider text-primary">
+                {stat.label}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

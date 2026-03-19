@@ -53,13 +53,13 @@ export function VideoHero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="flex justify-center"
         >
-          <Image
+          {/* <Image
             src="/mep-media/maverick_logo.png"
             alt="Maverick Energy Partners"
             width={220}
             height={60}
             className="h-14 w-auto object-contain md:h-16"
-          />
+          /> */}
         </motion.div>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -75,10 +75,10 @@ export function VideoHero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <Link href="/projects" className="inline-flex items-center rounded-md border-2 border-[#117A8B] bg-[#117A8B] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2 focus:ring-offset-[#0A2E4F]">
+          <Link href="/projects" className="inline-flex items-center rounded-md border-2 border-secondary bg-secondary px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary">
             View Projects
           </Link>
-          <Link href="/newsroom#contact" className="inline-flex items-center rounded-md border-2 border-white bg-transparent px-8 py-3 font-semibold text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0A2E4F]">
+          <Link href="/newsroom#contact" className="inline-flex items-center rounded-md border-2 border-secondary bg-transparent px-8 py-3 font-semibold text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary">
             Contact Us
           </Link>
         </motion.div>

@@ -34,7 +34,7 @@ export function LatestNewsPreview({ news }: LatestNewsPreviewProps) {
       aria-labelledby="latest-news-heading"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+        <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
           Latest News
         </p>
         <motion.h2
@@ -43,7 +43,7 @@ export function LatestNewsPreview({ news }: LatestNewsPreviewProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-2 font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-4xl"
+          className="mt-2 font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl"
         >
           News and updates
         </motion.h2>
@@ -60,7 +60,7 @@ export function LatestNewsPreview({ news }: LatestNewsPreviewProps) {
         >
           <Link
             href="/newsroom"
-            className="inline-flex rounded-md border-2 border-[#117A8B] bg-[#117A8B] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2"
+            className="inline-flex rounded-md border-2 border-secondary bg-secondary px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
           >
             View All News
           </Link>
@@ -80,12 +80,12 @@ function PreviewCard({ item, index }: { item: NewsroomItem; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4, delay: index * 0.08 }}
-      className="group overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-[#117A8B]/30 hover:shadow-md"
+      className="group overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-secondary/30 hover:shadow-md"
     >
-      <div className="relative aspect-video w-full overflow-hidden bg-[#F4F6F8]">
+      <div className="relative aspect-video w-full overflow-hidden bg-background">
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#117A8B] border-t-transparent" />
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-secondary border-t-transparent" />
           </div>
         )}
         <Image
@@ -101,14 +101,14 @@ function PreviewCard({ item, index }: { item: NewsroomItem; index: number }) {
       </div>
       <div className="p-5">
         {item.title ? (
-          <h3 className="font-[--font-poppins] font-bold text-[#0A2E4F] line-clamp-2">
+          <h3 className="font-[--font-poppins] font-bold text-primary line-clamp-2">
             {item.title}
           </h3>
         ) : null}
-        <time dateTime={item.date.replace(/\s/g, "-")} className="mt-1 block text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+        <time dateTime={item.date.replace(/\s/g, "-")} className="mt-1 block text-xs font-semibold uppercase tracking-wider text-secondary">
           {item.date}
         </time>
-        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-[#333333]">
+        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-text">
           {item.description}
         </p>
       </div>

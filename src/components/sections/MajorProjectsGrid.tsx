@@ -11,7 +11,7 @@ export function MajorProjectsGrid() {
       aria-labelledby="major-projects-heading"
     >
       <div className="mx-auto max-w-6xl">
-        <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+        <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
           Major Hydropower Projects
         </p>
         <motion.h2
@@ -20,7 +20,7 @@ export function MajorProjectsGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-2 font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-4xl"
+          className="mt-2 font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl"
         >
           Projects & Experience
         </motion.h2>
@@ -32,7 +32,7 @@ export function MajorProjectsGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-[#117A8B]/20 hover:shadow-md"
+              className="overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-secondary/20 hover:shadow-md"
             >
               <div className="relative aspect-video w-full">
                 <Image
@@ -44,22 +44,22 @@ export function MajorProjectsGrid() {
                 />
               </div>
               <div className="p-5">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+                <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
                   PROJECT NAME
                 </p>
-                <h3 className="mt-1 font-[--font-poppins] text-lg font-bold text-[#0A2E4F]">
+                <h3 className="mt-1 font-[--font-poppins] text-lg font-bold text-primary">
                   {project.name}
                 </h3>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+                <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-secondary">
                   CLIENT
                 </p>
-                <p className="mt-1 text-sm leading-relaxed text-[#333333]">
+                <p className="mt-1 text-sm leading-relaxed text-text">
                   {project.client}
                 </p>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+                <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-secondary">
                   SCOPE
                 </p>
-                <ul className="mt-2 list-inside list-disc space-y-1 text-sm leading-relaxed text-[#333333]">
+                <ul className="mt-2 list-inside list-disc space-y-1 text-sm leading-relaxed text-text">
                   {project.scope.map((item, j) => (
                     <li key={j}>{item}</li>
                   ))}

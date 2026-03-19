@@ -56,7 +56,7 @@ export function ProjectLifecycle() {
       aria-labelledby="lifecycle-heading"
     >
       <div className="mx-auto max-w-5xl flex flex-col items-center justify-center">
-        <p className="text-xs font-semibold uppercase tracking-wider text-[#117A8B]">
+        <p className="text-xs font-semibold uppercase tracking-wider text-secondary">
           Project Lifecycle
         </p>
         <motion.h2
@@ -65,21 +65,21 @@ export function ProjectLifecycle() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-2 font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-4xl text-center"
+          className="mt-2 font-[--font-poppins] text-3xl font-bold uppercase tracking-wide text-primary md:text-4xl text-center"
         >
           From strategy to operation
         </motion.h2>
 
         {/* Large circular lifecycle diagram */}
         <div className="mt-14 flex flex-col items-center relative">
-          <div className="relative w-[320px] md:w-[450px] lg:w-[550px] aspect-square max-w-full flex items-center justify-center">
+          <div className="relative w-[320px] md:w-112.5 lg:w-137.5 aspect-square max-w-full flex items-center justify-center">
             <LifecycleCircle
               activeIndex={activeIndex}
               onSelectNode={goTo}
             />
             {/* Center content inside the circle */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none px-8 md:px-12">
-              <div className="max-w-[220px] md:max-w-[280px] text-center">
+              <div className="max-w-55 md:max-w-70 text-center">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeIndex}
@@ -88,10 +88,10 @@ export function ProjectLifecycle() {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.25 }}
                   >
-                    <p className="font-[--font-poppins] text-lg font-bold text-[#0A2E4F] md:text-xl lg:text-2xl">
+                    <p className="font-[--font-poppins] text-lg font-bold text-primary md:text-xl lg:text-2xl">
                       {STEPS[activeIndex]?.label}
                     </p>
-                    <p className="mt-2 text-sm text-[#333333] leading-relaxed md:text-base">
+                    <p className="mt-2 text-sm text-text leading-relaxed md:text-base">
                       {STEPS[activeIndex]?.description}
                     </p>
                   </motion.div>
@@ -105,7 +105,7 @@ export function ProjectLifecycle() {
             <button
               type="button"
               onClick={goPrev}
-              className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#E5E7EB] bg-white text-[#0A2E4F] transition-colors hover:border-[#117A8B] hover:bg-[#117A8B]/10 hover:text-[#117A8B] focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2"
+              className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#E5E7EB] bg-white text-primary transition-colors hover:border-secondary hover:bg-secondary/10 hover:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
               aria-label="Previous step"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -115,7 +115,7 @@ export function ProjectLifecycle() {
             <button
               type="button"
               onClick={goNext}
-              className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#E5E7EB] bg-white text-[#0A2E4F] transition-colors hover:border-[#117A8B] hover:bg-[#117A8B]/10 hover:text-[#117A8B] focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2"
+              className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#E5E7EB] bg-white text-primary transition-colors hover:border-secondary hover:bg-secondary/10 hover:text-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
               aria-label="Next step"
             >
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

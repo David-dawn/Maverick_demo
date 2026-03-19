@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 
-const HERO_IMAGE = "/mep-media/hero.jpg";
+const HERO_IMAGE = "/mep-media/about.png";
 
 export function AboutHero() {
   const sectionRef = useRef<HTMLElement>(null);

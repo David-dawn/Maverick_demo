@@ -38,7 +38,12 @@ export async function getNewsroomNews(): Promise<NewsroomItem[]> {
     const items: NewsroomItem[] = snapshot.docs.map((doc) => {
       const d = doc.data();
       let image = typeof d.image === "string" ? d.image : "";
-      if (image && !image.startsWith("http://") && !image.startsWith("https://")) {
+      if (
+        image &&
+        !image.startsWith("http://") &&
+        !image.startsWith("https://") &&
+        !image.startsWith("/")
+      ) {
         image = "https://" + image.replace(/^\/+/, "");
       }
       return {
@@ -46,6 +51,7 @@ export async function getNewsroomNews(): Promise<NewsroomItem[]> {
         description: typeof d.description === "string" ? d.description : "",
         date: typeof d.date === "string" ? d.date : "",
         image,
+        fitImageFull: typeof d.fitImageFull === "boolean" ? d.fitImageFull : undefined,
       };
     });
     console.log("[getNewsroomNews] returning", items.length, "items. First item title:", items[0]?.title);

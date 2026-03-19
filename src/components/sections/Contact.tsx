@@ -39,7 +39,9 @@ const social = [
   },
 ];
 
-function OfficeCard({ office }: { office: any }) {
+type Office = (typeof offices)[number];
+
+function OfficeCard({ office }: { office: Office }) {
   const [isActive, setIsActive] = useState(false);
   const [showPhone, setShowPhone] = useState(false);
   const [showEmail, setShowEmail] = useState(false);

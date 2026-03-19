@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { Zap, Target, Leaf, Users, Award, Shield } from "lucide-react";
+import {  Leaf, Users, Award, Shield } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -165,7 +165,7 @@ export function About() {
     >
       {/* Subtle gradient / divider */}
       <div
-        className="absolute right-0 top-0 h-full w-1/3 max-w-md bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"
+        className="absolute right-0 top-0 h-full w-1/3 max-w-md bg-linear-to-l from-primary/5 to-transparent pointer-events-none"
         aria-hidden
       />
 
@@ -249,7 +249,7 @@ export function About() {
             <div className="relative flex flex-col sm:flex-row-reverse items-start gap-6 rounded-2xl bg-[#F5F5F5] p-6 md:p-8 overflow-hidden lg:col-start-1">
               <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-md sm:h-40 sm:w-40">
                 <Image
-                  src="/mep-media/vision.jpg"
+                  src="/mep-media/vision.png"
                   alt=""
                   fill
                   className="object-cover"
@@ -273,7 +273,7 @@ export function About() {
           ref={statsRef}
           className="relative left-1/2 -ml-[50vw] w-screen mt-16 md:mt-24 px-6 py-16 md:py-24 bg-primary overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-[#0A2E4F] via-[#0A2E4F] to-[#117A8B]/20 pointer-events-none" aria-hidden />
+          <div className="absolute inset-0 bg-linear-to-br from-primary via-primary to-secondary/20 pointer-events-none" aria-hidden />
           <div className="relative mx-auto max-w-6xl grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
             {/* Left column: heading, description, CTAs */}
             <div className="space-y-6">
@@ -292,13 +292,13 @@ export function About() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/projects"
-                  className="inline-flex rounded-lg bg-[#117A8B] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2 focus:ring-offset-[#0A2E4F]"
+                  className="inline-flex rounded-lg bg-secondary px-6 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
                 >
                   View Projects
                 </Link>
                 <Link
                   href="/newsroom#contact"
-                  className="inline-flex rounded-lg border-2 border-[#117A8B] bg-transparent px-6 py-3 font-semibold text-white transition-colors hover:bg-[#117A8B]/10 focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2 focus:ring-offset-[#0A2E4F]"
+                  className="inline-flex rounded-lg border-2 border-secondary bg-transparent px-6 py-3 font-semibold text-white transition-colors hover:bg-secondary/10 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
                 >
                   Contact Us
                 </Link>
@@ -307,16 +307,16 @@ export function About() {
 
             {/* Right column: 2x2 grid of stat cards */}
             <div className="grid grid-cols-2 gap-4 sm:gap-6" aria-labelledby="key-statistics-heading">
-              {STATS.map((stat, i) => (
+              {STATS.map((stat) => (
                 <div
                   key={stat.label}
-                  className="rounded-3xl p-8 text-center transition-all duration-300 hover:scale-[1.03] flex flex-col justify-center min-h-[140px] sm:min-h-[160px] bg-gradient-to-br from-cyan-400/90 to-emerald-400/90 odd:from-cyan-400/85 odd:to-teal-400/90 even:from-emerald-400/85 even:to-cyan-500/90"
+                  className="rounded-3xl p-8 text-center transition-all duration-300 hover:scale-[1.03] flex flex-col justify-center min-h-35 sm:min-h-40 bg-linear-to-br from-cyan-400/90 to-emerald-400/90 odd:from-cyan-400/85 odd:to-teal-400/90 even:from-emerald-400/85 even:to-cyan-500/90"
                 >
-                  <p className="font-[--font-poppins] text-4xl font-bold tabular-nums text-[#0A2E4F] sm:text-5xl">
+                  <p className="font-[--font-poppins] text-4xl font-bold tabular-nums text-primary sm:text-5xl">
                     <span data-stat-value>0</span>
                     {stat.suffix}
                   </p>
-                  <p className="mt-2 text-sm font-medium text-[#0A2E4F]/80 leading-snug">
+                  <p className="mt-2 text-sm font-medium text-primary/80 leading-snug">
                     {stat.label}
                   </p>
                 </div>
@@ -327,7 +327,7 @@ export function About() {
 
         {/* Core Values */}
         <div ref={valuesRef} className="mt-16 md:mt-24">
-          <h3 className="font-[family-name:var(--font-poppins)] text-2xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-3xl">
+          <h3 className="font-(family-name:--font-poppins) text-2xl font-bold uppercase tracking-wide text-primary md:text-3xl">
             Core Values
           </h3>
           <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -335,15 +335,15 @@ export function About() {
               <div
                 key={v.title}
                 data-value-card
-                className="rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-[#117A8B]/20"
+                className="rounded-xl border border-[#E5E7EB] bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-secondary/20"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-[#0A2E4F]/5 text-[#117A8B]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/5 text-secondary">
                   <v.icon className="h-6 w-6" aria-hidden />
                 </div>
-                <h4 className="mt-4 font-[family-name:var(--font-poppins)] font-bold text-[#0A2E4F]">
+                <h4 className="mt-4 font-(family-name:--font-poppins) font-bold text-primary">
                   {v.title}
                 </h4>
-                <p className="mt-2 text-sm leading-relaxed text-[#333333]">
+                <p className="mt-2 text-sm leading-relaxed text-text">
                   {v.description}
                 </p>
               </div>
@@ -356,12 +356,12 @@ export function About() {
           ref={ctaRef}
           className="mt-20 rounded-xl border border-[#E5E7EB] bg-white px-8 py-12 text-center shadow-sm md:mt-28 md:px-12 md:py-14"
         >
-          <p className="text-xl font-semibold text-[#0A2E4F] md:text-2xl">
+          <p className="text-xl font-semibold text-primary md:text-2xl">
             Ready to partner on your next hydropower project?
           </p>
           <Link
             href="#contact"
-            className="mt-6 inline-flex items-center rounded-md border-2 border-[#117A8B] bg-[#117A8B] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-[#117A8B] focus:ring-offset-2"
+            className="mt-6 inline-flex items-center rounded-md border-2 border-secondary bg-secondary px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
           >
             Contact Us
           </Link>

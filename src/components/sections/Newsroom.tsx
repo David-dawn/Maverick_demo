@@ -76,7 +76,7 @@ function NewsCard({ item }: { item: NewsroomItem }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.4 }}
-      className="group overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-[#117A8B]/30 hover:shadow-md"
+      className="group overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-secondary/30 hover:shadow-md"
     >
       <div className="flex flex-col md:flex-row">
         <div
@@ -88,10 +88,10 @@ function NewsCard({ item }: { item: NewsroomItem }) {
         >
           {!imageLoaded && (
             <div
-              className="absolute inset-0 flex items-center justify-center bg-[#F4F6F8]"
+              className="absolute inset-0 flex items-center justify-center bg-background"
               aria-hidden
             >
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-[#117A8B] border-t-transparent" />
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-secondary border-t-transparent" />
             </div>
           )}
           <Image
@@ -107,17 +107,17 @@ function NewsCard({ item }: { item: NewsroomItem }) {
         </div>
         <div className="flex flex-1 flex-col justify-center p-6 md:p-8 min-w-0">
           {item.title ? (
-            <h3 className="font-[--font-poppins] text-lg font-bold text-[#0A2E4F]">
+            <h3 className="font-[--font-poppins] text-lg font-bold text-primary">
               {item.title}
             </h3>
           ) : null}
           <time
             dateTime={item.date.replace(/\s/g, "-")}
-            className="block text-sm font-semibold uppercase tracking-wider text-[#117A8B] mt-1"
+            className="block text-sm font-semibold uppercase tracking-wider text-secondary mt-1"
           >
             {item.date ? `Date: ${item.date}` : ""}
           </time>
-          <p className="mt-3 text-[#333333] leading-relaxed">
+          <p className="mt-3 text-text leading-relaxed">
             {item.description}
           </p>
         </div>
@@ -147,14 +147,14 @@ export function Newsroom({ news }: NewsroomProps) {
         <div className="mx-auto max-w-6xl">
           <motion.nav
             aria-label="Breadcrumb"
-            className="hidden lg:flex lg:pt-[2rem]"
+            className="hidden lg:flex lg:pt-8"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
             <ol className="flex items-center gap-2 text-sm text-[#6B7280]">
               <li>
-                <Link href="/" className="hover:text-[#0A2E4F] font-semibold text-black focus:outline-none focus:underline">
+                <Link href="/" className="hover:text-primary font-semibold text-black focus:outline-none focus:underline">
                   Homepage
                 </Link>
               </li>
@@ -163,7 +163,7 @@ export function Newsroom({ news }: NewsroomProps) {
             </ol>
           </motion.nav>
           {/* Grid: mobile = heading, intro, IMAGE, featured details. Desktop = (heading+intro, featured) | image */}
-          <div className="grid grid-cols-1 gap-8 pt-[4rem]  lg:grid-cols-2 lg:pt-[4rem] lg:gap-12 lg:items-start">
+          <div className="grid grid-cols-1 gap-8 pt-16  lg:grid-cols-2 lg:pt-16 lg:gap-12 lg:items-start">
             {/* Block A: heading + intro — mobile order 1, lg col 1 row 1 */}
             <motion.div
               className="order-1 lg:row-start-1"
@@ -177,15 +177,15 @@ export function Newsroom({ news }: NewsroomProps) {
               >
                 Newsroom
               </h1>
-              <p className="mt-4 text-lg text-[#333333]">
-                Our latest <span className="text-[#117A8B] font-semibold">news</span>.
+              <p className="mt-4 text-lg text-text">
+                Our latest <span className="text-secondary font-semibold">news</span>.
               </p>
             </motion.div>
 
             {/* Block B: featured image — mobile order 2, lg col 2 spanning 2 rows */}
             {featured?.image && (
               <motion.div
-                className="relative order-2 aspect-video overflow-hidden rounded-xl bg-[#F4F6F8] lg:order-none lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:aspect-[4/3] lg:min-h-[280px] lg:mt-[10rem]"
+                className="relative order-2 aspect-video overflow-hidden rounded-xl bg-background lg:order-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:aspect-4/3 lg:min-h-70 lg:mt-40"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.25 }}
@@ -204,23 +204,23 @@ export function Newsroom({ news }: NewsroomProps) {
             {/* Block C: featured news details — mobile order 3, lg col 1 row 2 */}
             {featured && (
               <motion.div
-                className="order-3 mt-6 lg:mt-[10rem] lg:row-start-2 lg:pb-[5rem]"
+                className="order-3 mt-6 lg:mt-40 lg:row-start-2 lg:pb-20"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.35 }}
               >
-                <h2 className="font-[--font-poppins] text-xl font-bold text-[#0A2E4F] md:text-2xl leading-tight">
+                <h2 className="font-[--font-poppins] text-xl font-bold text-primary md:text-2xl leading-tight">
                   {featured.title || "Latest update"}
                 </h2>
                 {featured.date && (
                   <time
                     dateTime={featured.date.replace(/\s/g, "-")}
-                    className="mt-2 block text-sm font-semibold uppercase tracking-wider text-[#117A8B]"
+                    className="mt-2 block text-sm font-semibold uppercase tracking-wider text-secondary"
                   >
                     {featured.date}
                   </time>
                 )}
-                <p className="mt-3 text-[#333333] leading-relaxed line-clamp-3">
+                <p className="mt-3 text-text leading-relaxed line-clamp-3">
                   {featured.description}
                 </p>
               </motion.div>
@@ -232,18 +232,18 @@ export function Newsroom({ news }: NewsroomProps) {
       {/* Additional news list (newest → oldest) */}
       <section
         id="newsroom"
-        className="relative bg-[#F4F6F8] px-6 py-16 md:py-24"
+        className="relative bg-background px-6 py-16 md:py-24"
         aria-labelledby="all-news-heading"
       >
         <div className="mx-auto max-w-6xl">
           <h2
             id="all-news-heading"
-            className="font-[--font-poppins] text-2xl font-bold uppercase tracking-wide text-[#0A2E4F] md:text-3xl"
+            className="font-[--font-poppins] text-2xl font-bold uppercase tracking-wide text-primary md:text-3xl"
           >
             All articles
           </h2>
           {rest.length === 0 ? (
-            <p className="mt-6 text-[#333333]">No additional articles at this time.</p>
+            <p className="mt-6 text-text">No additional articles at this time.</p>
           ) : (
             <div className="mt-10 space-y-6">
               {rest.map((item, i) => (
