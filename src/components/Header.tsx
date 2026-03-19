@@ -32,7 +32,7 @@ export function Header() {
             alt="Maverick Energy Partners"
             width={160}
             height={44}
-            className="h-10 w-auto object-contain -ml-14 lg:mr-56"
+            className="h-10 w-auto object-contain -ml-14 lg:h-12 lg:mr-56"
           />
         </Link>
         <nav className="hidden md:block" aria-label="Main navigation">
