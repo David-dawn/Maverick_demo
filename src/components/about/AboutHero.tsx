@@ -52,7 +52,10 @@ export function AboutHero() {
       />
       
       <div className="relative z-10 flex h-full flex-col justify-end md:justify-center">
-        <div ref={contentRef} className="max-w-6xl mx-auto w-full px-6 pt-28 pb-16 md:py-28 flex flex-col">
+        <div
+          ref={contentRef}
+          className="max-w-6xl mx-auto w-full px-6 pt-28 pb-16 md:py-28 flex flex-col lg:text-justify"
+        >
           <nav aria-label="Breadcrumb" className="hidden lg:flex lg:mb-100">
             <ol className="flex items-center gap-2 text-sm text-white/80">
               <li>
@@ -66,11 +69,11 @@ export function AboutHero() {
           </nav>
           <h1
             id="about-hero-title"
-            className="font-[--font-poppins] text-3xl font-bold  text-white md:text-4xl lg:text-[7rem]"
+            className="font-[--font-poppins] text-3xl font-bold text-white md:text-4xl lg:text-[7rem] lg:text-left"
           >
             About Us
           </h1>
-    <p className="mt-4 text-[24px] font-bold text-white/90 leading-[1.2]">
+    <p className="mt-4 text-[24px] font-bold text-white/90 leading-[1.2] lg:text-left">
   Our mission and vision are <br className="block md:hidden" />
   to engineer a sustainable engineering future
 </p>

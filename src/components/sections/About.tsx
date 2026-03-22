@@ -360,7 +360,7 @@ export function About() {
             Ready to partner on your next hydropower project?
           </p>
           <Link
-            href="#contact"
+            href="/newsroom#contact"
             className="mt-6 inline-flex items-center rounded-md border-2 border-secondary bg-secondary px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2"
           >
             Contact Us
