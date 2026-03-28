@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -27,7 +27,7 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-6xl  items-center justify-between py-4">
         <Link href="/" className="shrink-0" aria-label="Maverick Energy Partners home">
-          <Image
+          <LoadingImage
             src="/mep-media/maverick_logo.png"
             alt="Maverick Energy Partners"
             width={160}

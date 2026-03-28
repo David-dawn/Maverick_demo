@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { projectsData } from "@/data/projectsData";
@@ -41,7 +41,7 @@ export function FeaturedHydropowerProjects() {
             >
               <div className="grid gap-0 lg:grid-cols-5 lg:gap-0">
                 <div className="relative aspect-video lg:col-span-2 lg:aspect-auto lg:min-h-70">
-                  <Image
+                  <LoadingImage
                     src={project.image}
                     alt={project.name}
                     fill

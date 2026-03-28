@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import { motion } from "framer-motion";
 import type { NewsroomItem } from "@/types/newsroom";
+import { getNewsroomNews } from "@/lib/getNewsroomNews";
 
 /** Fallback when Firestore is empty or fails.  */
 const DEFAULT_NEWS: NewsroomItem[] = [
@@ -66,7 +67,6 @@ function mergeAndSortNews(firestoreNews: NewsroomItem[] | null | undefined): New
 }
 
 function NewsCard({ item }: { item: NewsroomItem }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const fitFull = "fitImageFull" in item && item.fitImageFull;
   const altText = item.title || `News - ${item.date}`;
 
@@ -86,23 +86,13 @@ function NewsCard({ item }: { item: NewsroomItem }) {
               : "relative h-56 w-full shrink-0 md:h-72 md:w-80 lg:w-96"
           }
         >
-          {!imageLoaded && (
-            <div
-              className="absolute inset-0 flex items-center justify-center bg-background"
-              aria-hidden
-            >
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-secondary border-t-transparent" />
-            </div>
-          )}
-          <Image
+          <LoadingImage
             src={item.image}
             alt={altText}
             fill
-            className={`${fitFull ? "object-contain" : "object-cover"} ${imageLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-200`}
+            className={fitFull ? "object-contain" : "object-cover"}
             sizes="(max-width: 768px) 100vw, 384px"
             unoptimized={isRemoteUrl(item.image)}
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageLoaded(true)}
           />
         </div>
         <div className="flex flex-1 flex-col justify-center p-6 md:p-8 min-w-0">
@@ -131,7 +121,29 @@ function isRemoteUrl(src: string): boolean {
 }
 
 export function Newsroom({ news }: NewsroomProps) {
-  const sortedItems = useMemo(() => mergeAndSortNews(news), [news]);
+  const [liveNews, setLiveNews] = useState<NewsroomItem[] | null>(news ?? null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (news && news.length > 0) return;
+
+    getNewsroomNews()
+      .then((items) => {
+        if (!mounted) return;
+        if (items.length > 0) setLiveNews(items);
+      })
+      .catch(() => {
+        // Keep fallback content when request fails.
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, [news]);
+
+  const sourceNews = liveNews && liveNews.length > 0 ? liveNews : news;
+  const sortedItems = useMemo(() => mergeAndSortNews(sourceNews), [sourceNews]);
   const featured = sortedItems[0];
   const rest = sortedItems.slice(1);
 
@@ -190,7 +202,7 @@ export function Newsroom({ news }: NewsroomProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.25 }}
               >
-                <Image
+                <LoadingImage
                   src={featured.image}
                   alt={featured.title || "Latest news"}
                   fill

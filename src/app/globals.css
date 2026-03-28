@@ -41,3 +41,13 @@ body {
   color: var(--text);
   font-family: var(--font-inter), system-ui, sans-serif;
 }
+
+/* Desktop typography polish for more professional text alignment */
+@media (min-width: 1024px) {
+  main section p,
+  main section li {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+}

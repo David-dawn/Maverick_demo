@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 // import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -13,38 +13,63 @@ const HERO_VIDEOS = [
 
 export function VideoHero() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
 
   const handleVideoEnded = useCallback(() => {
     setActiveIndex((i) => (i + 1) % HERO_VIDEOS.length);
   }, []);
 
-  const currentSrc = HERO_VIDEOS[activeIndex];
+  useEffect(() => {
+    // Keep videos mounted: play only active one, pause/reset others.
+    videoRefs.current.forEach((video, index) => {
+      if (!video) return;
+
+      if (index === activeIndex) {
+        const playPromise = video.play();
+        if (playPromise) {
+          playPromise.catch(() => {
+            // Ignore autoplay rejection; video stays muted and can start on interaction.
+          });
+        }
+      } else {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+
+    // Preload the next video only (lighter than preloading all clips).
+    const nextIndex = (activeIndex + 1) % HERO_VIDEOS.length;
+    const nextVideo = videoRefs.current[nextIndex];
+    if (nextVideo) {
+      nextVideo.preload = "auto";
+      nextVideo.load();
+    }
+  }, [activeIndex]);
 
   return (
     <section
       className="relative flex min-h-svh w-full items-center justify-center overflow-hidden bg-primary"
       aria-label="Hero"
     >
-      {/* Full-bleed video layer — no vignette or scaling; original clarity */}
-      <div className="absolute inset-0 min-h-full min-w-full">
-        <motion.div
-          key={activeIndex}
-          className="absolute inset-0 h-full w-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+      {/* Full-bleed video layer with preloaded clips for smoother transitions */}
+      <div className="pointer-events-none absolute inset-0 min-h-full min-w-full">
+        {HERO_VIDEOS.map((src, index) => (
           <video
-            autoPlay
+            key={src}
+            ref={(el) => {
+              videoRefs.current[index] = el;
+            }}
             muted
             playsInline
-            preload="auto"
-            src={currentSrc}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-            aria-hidden
-            onEnded={handleVideoEnded}
+            preload={index === 0 ? "auto" : "metadata"}
+            src={src}
+            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-300 ${
+              index === activeIndex ? "opacity-100" : "opacity-0"
+            }`}
+            aria-hidden={index !== activeIndex}
+            onEnded={index === activeIndex ? handleVideoEnded : undefined}
           />
-        </motion.div>
+        ))}
       </div>
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-center px-6 py-24 text-center">
         <motion.div

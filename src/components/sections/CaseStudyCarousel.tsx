@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import { motion, AnimatePresence } from "framer-motion";
 import { projectsData } from "@/data/projectsData";
 
@@ -44,7 +44,7 @@ export function CaseStudyCarousel() {
             transition={{ duration: 0.4 }}
             className="absolute inset-0"
           >
-            <Image
+            <LoadingImage
               src={projectsData[currentIndex]?.image ?? ""}
               alt=""
               fill
@@ -69,7 +69,7 @@ export function CaseStudyCarousel() {
               transition={{ duration: 0.35 }}
               className="relative aspect-video overflow-hidden rounded-xl lg:aspect-auto lg:min-h-80"
             >
-              <Image
+              <LoadingImage
                 src={project?.image ?? ""}
                 alt={project?.name ?? ""}
                 fill

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import type { NewsroomItem } from "@/types/newsroom";
+import { getNewsroomNews } from "@/lib/getNewsroomNews";
 
 const DEFAULT_NEWS: NewsroomItem[] = [
    {
@@ -26,7 +27,29 @@ function isRemoteUrl(src: string): boolean {
 }
 
 export function LatestNewsPreview({ news }: LatestNewsPreviewProps) {
-  const items = (news && news.length > 0 ? news : DEFAULT_NEWS).slice(0, 3);
+  const [liveNews, setLiveNews] = useState<NewsroomItem[] | null>(news ?? null);
+
+  useEffect(() => {
+    let mounted = true;
+
+    if (news && news.length > 0) return;
+
+    getNewsroomNews()
+      .then((items) => {
+        if (!mounted) return;
+        if (items.length > 0) setLiveNews(items);
+      })
+      .catch(() => {
+        // Keep fallback content when request fails.
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, [news]);
+
+  const sourceNews = liveNews && liveNews.length > 0 ? liveNews : news;
+  const items = (sourceNews && sourceNews.length > 0 ? sourceNews : DEFAULT_NEWS).slice(0, 3);
 
   return (
     <section
@@ -71,7 +94,6 @@ export function LatestNewsPreview({ news }: LatestNewsPreviewProps) {
 }
 
 function PreviewCard({ item, index }: { item: NewsroomItem; index: number }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const altText = item.title || `News - ${item.date}`;
 
   return (
@@ -83,20 +105,13 @@ function PreviewCard({ item, index }: { item: NewsroomItem; index: number }) {
       className="group overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-secondary/30 hover:shadow-md"
     >
       <div className="relative aspect-video w-full overflow-hidden bg-background">
-        {!imageLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-secondary border-t-transparent" />
-          </div>
-        )}
-        <Image
+        <LoadingImage
           src={item.image}
           alt={altText}
           fill
-          className={`object-cover ${imageLoaded ? "opacity-100" : "opacity-0"} transition-opacity duration-200`}
+          className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           unoptimized={isRemoteUrl(item.image)}
-          onLoad={() => setImageLoaded(true)}
-          onError={() => setImageLoaded(true)}
         />
       </div>
       <div className="p-5">

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import {  Leaf, Users, Award, Shield } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -227,7 +227,7 @@ export function About() {
             {/* Top right: Mission card - light gray bg, circular image left of text */}
             <div className="relative flex flex-col sm:flex-row items-start gap-6 rounded-2xl bg-[#F5F5F5] p-6 md:p-8 overflow-hidden">
               <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-md sm:h-40 sm:w-40">
-                <Image
+                <LoadingImage
                   src="/mep-media/zungeru.jpg"
                   alt=""
                   fill
@@ -248,7 +248,7 @@ export function About() {
             {/* Bottom left: Vision card - light gray bg, circular image right of text */}
             <div className="relative flex flex-col sm:flex-row-reverse items-start gap-6 rounded-2xl bg-[#F5F5F5] p-6 md:p-8 overflow-hidden lg:col-start-1">
               <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full ring-4 ring-white shadow-md sm:h-40 sm:w-40">
-                <Image
+                <LoadingImage
                   src="/mep-media/vision.png"
                   alt=""
                   fill

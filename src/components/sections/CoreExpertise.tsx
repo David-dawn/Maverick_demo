@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Zap,
@@ -97,7 +97,7 @@ export function CoreExpertise() {
                     animate={{ scale: 1.03 }}
                     transition={{ duration: 8, ease: "easeInOut" }}
                   >
-                    <Image
+                    <LoadingImage
                       src={activeImage.src}
                       alt={activeImage.alt}
                       fill

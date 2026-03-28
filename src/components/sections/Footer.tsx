@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import Link from "next/link";
 import { Youtube, Instagram, Linkedin } from "lucide-react";
 import { navLinks } from "@/data/navigation";
@@ -16,7 +16,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-start md:justify-between">
           <div className="flex flex-col items-center md:items-start">
-            <Image
+            <LoadingImage
               src="/mep-media/maverick_logo.png"
               alt="Maverick Energy Partners"
               width={200}

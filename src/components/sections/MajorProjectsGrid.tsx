@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import { motion } from "framer-motion";
 import { projectsData } from "@/data/projectsData";
 
@@ -35,7 +35,7 @@ export function MajorProjectsGrid() {
               className="overflow-hidden rounded-xl border border-[#E5E7EB] bg-white shadow-sm transition-all hover:border-secondary/20 hover:shadow-md"
             >
               <div className="relative aspect-video w-full">
-                <Image
+                <LoadingImage
                   src={project.image}
                   alt={project.name}
                   fill

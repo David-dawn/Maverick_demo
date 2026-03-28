@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { LoadingImage } from "@/components/ui/LoadingImage";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -61,7 +61,7 @@ export function ExecutiveTeam() {
             >
               <div className="flex flex-col gap-8 md:flex-row md:gap-10">
                 <div className="relative h-64 w-full shrink-0 overflow-hidden rounded-lg bg-primary/5 md:h-80 md:w-72">
-                  <Image
+                  <LoadingImage
                     src={exec.image}
                     alt={exec.name}
                     fill
