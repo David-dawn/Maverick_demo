@@ -100,9 +100,9 @@ export function VideoHero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <Link href="/projects" className="inline-flex items-center rounded-md border-2 border-secondary bg-secondary px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary">
+          {/* <Link href="/projects" className="inline-flex items-center rounded-md border-2 border-secondary bg-secondary px-8 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] hover:border-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary">
             View Projects
-          </Link>
+          </Link> */}
           <Link href="/newsroom#contact" className="inline-flex items-center rounded-md border-2 border-secondary bg-transparent px-8 py-3 font-semibold text-white transition-colors hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary">
             Contact Us
           </Link>

@@ -3,7 +3,6 @@ import { VideoHero } from "@/components/sections/VideoHero";
 import { CompanyOverview } from "@/components/sections/CompanyOverview";
 import { CoreExpertise } from "@/components/sections/CoreExpertise";
 import { ProjectLifecycle } from "@/components/sections/ProjectLifecycle";
-import { FeaturedHydropowerProjects } from "@/components/sections/FeaturedHydropowerProjects";
 import { LatestNewsPreview } from "@/components/sections/LatestNewsPreview";
 
 export default function Home() {
@@ -13,7 +12,7 @@ export default function Home() {
       <CompanyOverview />
       <CoreExpertise />
       <ProjectLifecycle />
-      <FeaturedHydropowerProjects />
+      {/* <FeaturedHydropowerProjects /> */}
       <LatestNewsPreview />
     </PageLayout>
   );

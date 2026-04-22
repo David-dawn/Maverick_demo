@@ -17,6 +17,8 @@ const STATS = [
   { value: 2, suffix: "B+", label: "Project Value Managed ($)" },
 ];
 
+
+
 const VALUES = [
   {
     icon: Award,
@@ -290,12 +292,12 @@ export function About() {
                 Our expertise is backed by decades of combined experience, successful project delivery, and a global footprint across hydropower and infrastructure markets.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link
+                {/* <Link
                   href="/projects"
                   className="inline-flex rounded-lg bg-secondary px-6 py-3 font-semibold text-white transition-colors hover:bg-[#0e6b7a] focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
                 >
                   View Projects
-                </Link>
+                </Link> */}
                 <Link
                   href="/newsroom#contact"
                   className="inline-flex rounded-lg border-2 border-secondary bg-transparent px-6 py-3 font-semibold text-white transition-colors hover:bg-secondary/10 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-primary"
@@ -350,7 +352,7 @@ export function About() {
             ))}
           </div>
         </div>
-
+           
         {/* CTA */}
         <div
           ref={ctaRef}
