@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const HERO_VIDEOS = [
-  "/video/Dam.mp4",
   "/video/ethopia.mp4",
   "/video/koysha Dam.mp4",
 ];

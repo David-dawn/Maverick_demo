@@ -54,9 +54,58 @@ type NewsroomProps = {
 
 function parseDateForSort(dateStr: string): number {
   if (!dateStr || !dateStr.trim()) return 0;
-  const normalized = dateStr.replace(/(\d+)(st|nd|rd|th)\s+/gi, "$1 ");
-  const d = new Date(normalized);
-  return isNaN(d.getTime()) ? 0 : d.getTime();
+  const monthMap: Record<string, number> = {
+    january: 0,
+    february: 1,
+    march: 2,
+    april: 3,
+    may: 4,
+    june: 5,
+    july: 6,
+    august: 7,
+    september: 8,
+    october: 9,
+    november: 10,
+    december: 11,
+  };
+
+  const cleaned = dateStr
+    .trim()
+    .toLowerCase()
+    .replace(/^date:\s*/i, "")
+    .replace(/,/g, " ")
+    .replace(/\s+/g, " ")
+    .replace(/(\d{1,2})(st|nd|rd|th)\b/g, "$1");
+
+  // "25 october 2024"
+  const dmy = cleaned.match(/^(\d{1,2})\s+([a-z]+)\s+(\d{4})$/);
+  if (dmy) {
+    const day = Number(dmy[1]);
+    const month = monthMap[dmy[2]];
+    const year = Number(dmy[3]);
+    if (month != null) return Date.UTC(year, month, day);
+  }
+
+  // "october 25 2024"
+  const mdy = cleaned.match(/^([a-z]+)\s+(\d{1,2})\s+(\d{4})$/);
+  if (mdy) {
+    const month = monthMap[mdy[1]];
+    const day = Number(mdy[2]);
+    const year = Number(mdy[3]);
+    if (month != null) return Date.UTC(year, month, day);
+  }
+
+  // "25/10/2024" or "25-10-2024"
+  const numeric = cleaned.match(/^(\d{1,2})[/-](\d{1,2})[/-](\d{4})$/);
+  if (numeric) {
+    const day = Number(numeric[1]);
+    const month = Number(numeric[2]) - 1;
+    const year = Number(numeric[3]);
+    return Date.UTC(year, month, day);
+  }
+
+  const parsed = Date.parse(cleaned);
+  return Number.isNaN(parsed) ? 0 : parsed;
 }
 
 /** Use Firestore news when non-empty; otherwise use fallback. Sort newest first. */
