@@ -7,17 +7,31 @@ import { Youtube, Instagram, Linkedin, Phone, Mail } from "lucide-react";
 const offices = [
   {
     region: "Europe",
-    country: "MEP, France",
-    address: "81, Rue Jouffroy d'Abbans, Paris 75017",
-    phone: "+33 (60) 795 32 10",
-    email: "france@maverickenergypartners.net",
+    locations: [
+      {
+        country: "MEP, France",
+        address: "81, Rue Jouffroy d'Abbans, Paris 75017",
+        phone: "+33 (60) 795 32 10",
+        email: "france@maverickenergypartners.net",
+      },
+    ],
   },
   {
     region: "Africa",
-    country: "MEP, Nigeria",
-    address: "44, Lord Lugard Street, Asokoro Abuja",
-    phone: "+234 814 278 08 11",
-    email: "nigeria@maverickenergypartners.net",
+    locations: [
+      {
+        country: "SEYCHELLES",
+        address: "103 Sham Peng Tong Plaza, Victoria, Mahe",
+        email: "companysecretary@maverickenergypartners.net",
+        isHeadOffice: true,
+      },
+      {
+        country: "MEP, Nigeria",
+        address: "44, Lord Lugard Street, Asokoro Abuja",
+        phone: "+234 814 278 08 11",
+        email: "nigeria@maverickenergypartners.net",
+      },
+    ],
   },
 ];
 
@@ -43,13 +57,13 @@ type Office = (typeof offices)[number];
 
 function OfficeCard({ office }: { office: Office }) {
   const [isActive, setIsActive] = useState(false);
-  const [showPhone, setShowPhone] = useState(false);
-  const [showEmail, setShowEmail] = useState(false);
+  const [visiblePhoneKey, setVisiblePhoneKey] = useState<string | null>(null);
+  const [visibleEmailKey, setVisibleEmailKey] = useState<string | null>(null);
 
   const handleClick = () => {
     setIsActive(!isActive);
-    setShowPhone(false);
-    setShowEmail(false);
+    setVisiblePhoneKey(null);
+    setVisibleEmailKey(null);
   };
 
   return (
@@ -71,49 +85,71 @@ function OfficeCard({ office }: { office: Office }) {
             transition={{ duration: 0.3 }}
             className="mt-4 overflow-hidden"
           >
-            <p className="font-semibold text-primary">{office.country}</p>
-            <p className="mt-2 text-text">{office.address}</p>
+            <div className="space-y-5">
+              {office.locations.map((location) => {
+                const key = `${office.region}-${location.country}`;
+                const showPhone = visiblePhoneKey === key;
+                const showEmail = visibleEmailKey === key;
 
-            {/* PHONE */}
-            <div className="mt-5 flex items-center gap-3">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowPhone(!showPhone);
-                }}
-                className="flex items-center justify-center rounded-full bg-primary/10 p-2 hover:bg-primary hover:text-white"
-              >
-                <Phone size={18} />
-              </button>
-              {showPhone && (
-                <a
-                  href={`tel:${office.phone.replace(/\s/g, "")}`}
-                  className="text-sm text-text hover:text-secondary"
-                >
-                  {office.phone}
-                </a>
-              )}
-            </div>
+                return (
+                  <div
+                    key={key}
+                    className="rounded-lg border border-gray-100 bg-gray-50/60 p-4"
+                  >
+                    <div className="flex items-center gap-2">
+                      <p className="font-semibold text-primary">{location.country}</p>
+                      {location.isHeadOffice && (
+                        <span className="rounded-full bg-secondary/15 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-secondary">
+                          Head Office
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-2 text-text">{location.address}</p>
 
-            {/* EMAIL */}
-            <div className="mt-3 flex items-center gap-3">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setShowEmail(!showEmail);
-                }}
-                className="flex items-center justify-center rounded-full bg-primary/10 p-2 hover:bg-primary hover:text-white"
-              >
-                <Mail size={18} />
-              </button>
-              {showEmail && (
-                <a
-                  href={`mailto:${office.email}`}
-                  className="text-sm text-text hover:text-secondary"
-                >
-                  {office.email}
-                </a>
-              )}
+                    {location.phone ? (
+                      <div className="mt-5 flex items-center gap-3">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setVisiblePhoneKey(showPhone ? null : key);
+                          }}
+                          className="flex items-center justify-center rounded-full bg-primary/10 p-2 hover:bg-primary hover:text-white"
+                        >
+                          <Phone size={18} />
+                        </button>
+                        {showPhone && (
+                          <a
+                            href={`tel:${location.phone.replace(/\s/g, "")}`}
+                            className="text-sm text-text hover:text-secondary"
+                          >
+                            {location.phone}
+                          </a>
+                        )}
+                      </div>
+                    ) : null}
+
+                    <div className="mt-3 flex items-center gap-3">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setVisibleEmailKey(showEmail ? null : key);
+                        }}
+                        className="flex items-center justify-center rounded-full bg-primary/10 p-2 hover:bg-primary hover:text-white"
+                      >
+                        <Mail size={18} />
+                      </button>
+                      {showEmail && (
+                        <a
+                          href={`mailto:${location.email}`}
+                          className="text-sm text-text hover:text-secondary"
+                        >
+                          {location.email}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         )}

@@ -189,20 +189,22 @@ export function About() {
             <span className="text-secondary">reliable projects</span> — wherever they are.
           </h2>
 
-          {/* Right: paragraphs with bold highlights */}
+          {/* Right: approved about copy */}
           <div className="space-y-6 text-text leading-relaxed">
             <p className="text-base md:text-lg leading-[1.7]">
-              <strong className="text-primary">MAVERICK Energy Partners (MEP)</strong> is a{" "}
-              <strong className="text-primary">global engineering and consulting</strong> company delivering{" "}
-              <strong className="text-primary">integrated solutions</strong> for{" "}
-              <strong className="text-primary">sustainable energy and built environment projects</strong>. Our expertise is trusted worldwide across multiple markets like nuclear, renewables, power & gas, electrical grids, hydropower & dams, water resources & supply, desalination, complex & high-tech buildings, transport infrastructures, and ports & waterways.
+              Maverick Energy Partners (MEP) is a specialized hydropower and renewable energy development and advisory firm, supported by a team with decades of combined industry experience. The firm brings together seasoned professionals with deep expertise across technical engineering, project finance, and strategic infrastructure development.
             </p>
             <p className="text-base md:text-lg leading-[1.7]">
-              By connecting{" "}
-              <strong className="text-primary">strategy, design, engineering, social & environmental studies, project management and in-house digital applications</strong>, we partner with companies and public authorities to create a positive impact on people and planet.
+              MEP delivers end-to-end, integrated solutions across the entire project lifecycle—from early-stage feasibility studies, hydrological and resource assessments, and project planning to detailed engineering design, construction supervision, financial structuring, and long-term operational support. The firm is widely recognized for its ability to execute complex energy infrastructure projects efficiently, with a strong emphasis on value engineering for cost optimization, risk management, and timely delivery.
             </p>
             <p className="text-base md:text-lg leading-[1.7]">
-              Backed by <strong className="text-primary">more than 100 years of experience</strong>, today MEP is a community of <strong className="text-primary">passionate experts</strong> across the globe, committed to ethical business and the fight against climate change. Maverick Energy Partners is your trusted partner for <strong className="text-primary">sustainable hydropower development</strong>.
+              Serving a diverse portfolio of clients—including government institutions, multinational corporations, development finance institutions (DFIs), and private investors—MEP has built a strong reputation for technical excellence, reliability, and consistent performance. Its approach is grounded in international best practices and aligned with lender requirements, ensuring that projects are both bankable and sustainable.
+            </p>
+            <p className="text-base md:text-lg leading-[1.7]">
+              At the core of MEP’s operations is a firm commitment to environmental stewardship, social responsibility, and sustainable development. ESG principles are embedded across all project phases, ensuring alignment with global clean energy targets and delivering meaningful long-term value to host communities.
+            </p>
+            <p className="text-base md:text-lg leading-[1.7]">
+              Through a collaborative delivery model, deep sector expertise, and a forward-looking strategy, MEP continues to position itself as a trusted partner in delivering scalable, resilient, and sustainable energy solutions globally.
             </p>
           </div>
         </div>
@@ -242,7 +244,7 @@ export function About() {
                   Mission
                 </h4>
                 <p className="mt-3 text-text leading-relaxed">
-                  To deliver world-class hydropower and dam engineering services that advance clean energy, drive economic growth, and uphold the highest standards of safety, quality, and environmental stewardship for our clients and communities.
+                  To deliver end-to-end, integrated hydropower and renewable energy solutions across the full project lifecycle, combining technical engineering, project finance, and strategic infrastructure expertise with a strong emphasis on value engineering, risk management, and timely delivery.
                 </p>
               </div>
             </div>
@@ -263,7 +265,7 @@ export function About() {
                   Vision
                 </h4>
                 <p className="mt-3 text-text leading-relaxed">
-                  A world where sustainable hydropower is a cornerstone of reliable, affordable, and clean energy—with Maverick Energy Partners recognized as the partner of choice for complex, high-impact projects.
+                  To be the trusted global partner for scalable, resilient, and sustainable energy infrastructure, recognized for technical excellence, reliability, ESG leadership, and long-term value creation for clients and host communities.
                 </p>
               </div>
             </div>
