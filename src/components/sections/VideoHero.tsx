@@ -5,20 +5,29 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const HERO_VIDEOS = [
-  "/video/ethopia.mp4",
-  "/video/koysha Dam.mp4",
-];
+const DESKTOP_HERO_VIDEO = "/video/Dam.mp4";
+const MOBILE_HERO_VIDEOS = ["/video/ethopia.mp4", "/video/koysha Dam.mp4"];
 
 export function VideoHero() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
   const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
 
   const handleVideoEnded = useCallback(() => {
-    setActiveIndex((i) => (i + 1) % HERO_VIDEOS.length);
+    setActiveIndex((i) => (i + 1) % MOBILE_HERO_VIDEOS.length);
   }, []);
 
   useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => setIsDesktop(media.matches);
+    onChange();
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (isDesktop) return;
+
     // Keep videos mounted: play only active one, pause/reset others.
     videoRefs.current.forEach((video, index) => {
       if (!video) return;
@@ -37,13 +46,13 @@ export function VideoHero() {
     });
 
     // Preload the next video only (lighter than preloading all clips).
-    const nextIndex = (activeIndex + 1) % HERO_VIDEOS.length;
+    const nextIndex = (activeIndex + 1) % MOBILE_HERO_VIDEOS.length;
     const nextVideo = videoRefs.current[nextIndex];
     if (nextVideo) {
       nextVideo.preload = "auto";
       nextVideo.load();
     }
-  }, [activeIndex]);
+  }, [activeIndex, isDesktop]);
 
   return (
     <section
@@ -52,23 +61,36 @@ export function VideoHero() {
     >
       {/* Full-bleed video layer with preloaded clips for smoother transitions */}
       <div className="pointer-events-none absolute inset-0 min-h-full min-w-full">
-        {HERO_VIDEOS.map((src, index) => (
+        {isDesktop ? (
           <video
-            key={src}
-            ref={(el) => {
-              videoRefs.current[index] = el;
-            }}
+            autoPlay
+            loop
             muted
             playsInline
-            preload={index === 0 ? "auto" : "metadata"}
-            src={src}
-            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-300 ${
-              index === activeIndex ? "opacity-100" : "opacity-0"
-            }`}
-            aria-hidden={index !== activeIndex}
-            onEnded={index === activeIndex ? handleVideoEnded : undefined}
+            preload="auto"
+            src={DESKTOP_HERO_VIDEO}
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            aria-hidden
           />
-        ))}
+        ) : (
+          MOBILE_HERO_VIDEOS.map((src, index) => (
+            <video
+              key={src}
+              ref={(el) => {
+                videoRefs.current[index] = el;
+              }}
+              muted
+              playsInline
+              preload={index === 0 ? "auto" : "metadata"}
+              src={src}
+              className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-300 ${
+                index === activeIndex ? "opacity-100" : "opacity-0"
+              }`}
+              aria-hidden={index !== activeIndex}
+              onEnded={index === activeIndex ? handleVideoEnded : undefined}
+            />
+          ))
+        )}
       </div>
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col items-center justify-center px-6 py-24 text-center">
         <motion.div
